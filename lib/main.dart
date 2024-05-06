@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './themes.dart';
+import 'package:communitary_service_app/themes.dart';
 
 void main() {
   runApp(const MainApp());
