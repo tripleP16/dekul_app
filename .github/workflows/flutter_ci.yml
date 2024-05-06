@@ -1,5 +1,5 @@
 name: Flutter CI
-run-name: "Flutter CI executed by {{github.actor}} 🛸"
+run-name: "Flutter CI executed by ${{github.actor}} 🛸"
 
 on:
   push:
