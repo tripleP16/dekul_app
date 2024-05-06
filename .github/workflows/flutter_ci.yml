@@ -10,9 +10,10 @@ jobs:
   flutter_ci:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: subosito/flutter-action@v2
       with:
+        channel: stable
         flutter-version: '3.16.9' # Specify the Flutter version
         cache: true
 
@@ -21,3 +22,14 @@ jobs:
 
     - name: Run lint checks
       run: flutter analyze
+
+
+    - name: Check cache outputs
+      run: |
+        echo CACHE-PATH=${{ steps.flutter-action.outputs.CACHE-PATH }}
+        echo CACHE-KEY=${{ steps.flutter-action.outputs.CACHE-KEY }}
+        echo CHANNEL=${{ steps.flutter-action.outputs.CHANNEL }}
+        echo VERSION=${{ steps.flutter-action.outputs.VERSION }}
+        echo ARCHITECTURE=${{ steps.flutter-action.outputs.ARCHITECTURE }}
+        echo PUB-CACHE-PATH=${{ steps.flutter-action.outputs.PUB-CACHE-PATH }}
+        echo PUB-CACHE-KEY=${{ steps.flutter-action.outputs.PUB-CACHE-KEY }}
