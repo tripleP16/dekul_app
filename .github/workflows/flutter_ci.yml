@@ -33,9 +33,3 @@ jobs:
       if: runner.os == 'macOS'
       run: flutter build ios --no-codesign
 
-    - name: Notify Discord
-      uses: Ilshidur/action-discord@0.3.2
-            
-      env:
-        DISCORD_WEBHOOK: 'https://discord.com/api/webhooks/1237097857845166100/CbhjqzWncHQu3jv8kzrO1yMdYQSfJGQ5T6p6OWO6pKz7XRGRS9mJ8LxAW1n4_OcZ3icY'
-
