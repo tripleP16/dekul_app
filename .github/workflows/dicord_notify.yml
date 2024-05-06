@@ -1,4 +1,5 @@
 name: Discord Notify
+run-name: Sending notification
 
 on:
   push:
