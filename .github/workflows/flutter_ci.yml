@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - dev
+      - 'feature/discordWorkflow'
   pull_request:
     branches:
       - main
