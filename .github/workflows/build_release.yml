@@ -1,11 +1,13 @@
 name: Build release
-run-name: Bulding release ${{github.ref}} 🪚
+run-name: Bulding release ${{github.ref_name}} 🪚
 
 on:
    release:
       types: [published]
 permissions:
   contents: write
+env:
+  VERSION: ${{github.ref_name}}
 
 jobs:   
   building:
@@ -37,29 +39,39 @@ jobs:
       - name: Run lint checks
         run: flutter analyze
 
-      - name: Build APK for android 🤖.
+      - name: Build android apk 🤖.
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
         run: flutter build apk
       
-      - name: Build Appbundle for android 🤖.
+      - name: Build android bundle 🤖.
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
-        run: flutter build appbundle
+        run: flutter build appbundle --build-name $VERSION
 
-      - name: Build App for ios 🍎.
+      - name: Build ios app 🍎.
         if: ${{matrix.os == 'macos-latest' && matrix.type == 'app'}}
-        run: flutter build ios --release --no-codesign
+        run: flutter build ios --release --no-codesign --build-name $VERSION
 
-      - name: Include APK in github release.
+      - name: Build ios bundle 🍎.
+        if: ${{matrix.os == 'macos-latest' && matrix.type == 'bundle'}}
+        run: flutter build ipa --build-name $VERSION 
+
+      - name: Include android App in github release 📦.
         uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
         with: 
-          files: './build/app/outputs/flutter-apk/app-release.apk'
+          files: './build/app/outputs/flutter-apk/-release.apk'
           prerelease: false
           generate_release_notes: false
           make_latest: false
 
-      - name: Include APPBUNDLE in github release.
+      - name: Include android bundle in github release 📦.
         uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
         with:
           files: './build/app/outputs/bundle/release/app-release.aab'
+
+      - name: Include ios app in github release .
+        uses: softprops/action-gh-release@v2
+        if: ${{matrix.os == 'macos-latest' && matrix.type == 'app'}}
+        with:
+          files: './build/ios/iphoneos/Runner.app'
