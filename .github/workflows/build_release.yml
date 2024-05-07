@@ -25,7 +25,7 @@ jobs:
 
     steps: 
       - name: Setup repo
-        uses: actions/chechout@v4
+        uses: actions/checkout@v4
 
       - name: Setup flutter on ${{matrix.os}}
         uses: subosito/flutter-action@v2 
