@@ -1,0 +1,66 @@
+name: Build release
+run-name: Bulding release ${{github.ref}} 🪚
+
+on:
+  release:
+    types: [released]
+
+permissions:
+  contents: write
+
+jobs:   
+  building:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+        type:
+          - bundle
+          - app
+    
+    runs-on: ${{matrix.os}}
+
+    steps: 
+      - name: Setup repo
+        uses: actions/chechout@v4
+
+      - name: Setup flutter on ${{matrix.os}}
+        uses: subosito/flutter-action@v2 
+        with:
+          channel: stable
+          flutter-version: '3.16.9'
+          cache: true
+
+      - name: Install dependecies
+        run: flutter pub get
+
+      - name: Run lint checks
+        run: flutter lint checks
+
+      - name: Build APK for android 🤖.
+        if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
+        run: flutter build apk
+      
+      - name: Build Appbundle for android 🤖.
+        if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
+        run: flutter build appbundle
+
+      - name: Build App for ios 🍎.
+        if: ${{matrix.os == 'macos-latest' && matrix.type == 'app'}}
+        run: flutter build ios --release --no-codesign
+
+      - name: Include APK in github release.
+        uses: softprops/action-gh-release@v2
+        if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
+        with: 
+          files: './build/app/outputs/flutter-apk/app-release.apk'
+          prerelease: false
+          generate_release_notes: false
+          make_latest: false
+
+      - name: Include APPBUNDLE in github release.
+        uses: softprops/actions-gh-release@v2
+        if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
+        with:
+          files: './build/app/outputs/bundle/release/app-release.aab'
