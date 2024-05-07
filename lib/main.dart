@@ -1,5 +1,6 @@
+import 'package:communitary_service_app/config/router/app_router.dart';
+import 'package:communitary_service_app/config/themes/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:communitary_service_app/themes.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,12 +11,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: light,
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp.router(
+      theme: AppTheme().getTheme(),
+      routerConfig: appRouter,
     );
-  }  
+  }
 }

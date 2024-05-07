@@ -23,13 +23,15 @@ const lightScheme = ColorScheme.light(
   surface: AppColors.primarySurface,
   onSurface: AppColors.onSurface20,
   outline: AppColors.primaryContainer
-  // surface
-
 );
 
-var scheme = ColorScheme.fromSeed(seedColor: AppColors.primary); 
+class AppTheme {
+  ThemeData getTheme() {
+    return ThemeData(
+      colorScheme: lightScheme,
 
-ThemeData light = ThemeData(
-  colorScheme: lightScheme,
-  useMaterial3: true,
-);
+      useMaterial3: true,
+    );
+  }
+}
+
