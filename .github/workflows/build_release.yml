@@ -4,9 +4,6 @@ run-name: Bulding release ${{github.ref}} 🪚
 on:
    release:
       types: [released]
-   push:
-     branches:
-       - "feature/improveBuildTimeWorkflow"
 permissions:
   contents: write
 
