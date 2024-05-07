@@ -15,7 +15,7 @@ jobs:
       with:
         channel: stable
         flutter-version: '3.16.9' # Specify the Flutter version
-        cache: true
+        cache: false
 
     - name: Install dependencies
       run: flutter pub get
