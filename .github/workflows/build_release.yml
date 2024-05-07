@@ -45,15 +45,15 @@ jobs:
       
       - name: Build android bundle 🤖.
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
-        run: flutter build appbundle --build-name $VERSION
+        run: flutter build appbundle --build-name ${{VERSION}}
 
       - name: Build ios app 🍎.
         if: ${{matrix.os == 'macos-latest' && matrix.type == 'app'}}
-        run: flutter build ios --release --no-codesign --build-name $VERSION
+        run: flutter build ios --release --no-codesign --build-name ${{VERSION}}
 
       - name: Build ios bundle 🍎.
         if: ${{matrix.os == 'macos-latest' && matrix.type == 'bundle'}}
-        run: flutter build ipa --build-name $VERSION 
+        run: flutter build ipa --no-codesign --build-name ${{VERSION}} 
 
       - name: Include android App in github release 📦.
         uses: softprops/action-gh-release@v2
