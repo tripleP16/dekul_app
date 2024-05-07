@@ -25,6 +25,7 @@ jobs:
 
 
     - name: Check cache outputs
+      shell: bash
       run: |
         echo CACHE-PATH=${{ steps.flutter-action.outputs.CACHE-PATH }}
         echo CACHE-KEY=${{ steps.flutter-action.outputs.CACHE-KEY }}
