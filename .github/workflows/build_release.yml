@@ -38,7 +38,7 @@ jobs:
         run: flutter pub get
 
       - name: Run lint checks
-        run: flutter lint checks
+        run: flutter analyze
 
       - name: Build APK for android 🤖.
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
