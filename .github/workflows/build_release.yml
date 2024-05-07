@@ -58,10 +58,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
         with: 
-          files: './build/app/outputs/flutter-apk/-release.apk'
-          prerelease: false
-          generate_release_notes: false
-          make_latest: false
+          files: './build/app/outputs/flutter-apk/app-release.apk'
 
       - name: Include android bundle in github release android 🤖📦🔥.
         uses: softprops/action-gh-release@v2
@@ -73,7 +70,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'macos-latest' && matrix.type == 'app'}}
         with:
-          files: './build/ios/iphoneos/Runner.app'
+          files: '/Users/runner/work/dekul_app/dekul_app/build/ios/iphoneos/Runner.app'
 
   notify:
     runs-on: 'ubuntu-latest'
