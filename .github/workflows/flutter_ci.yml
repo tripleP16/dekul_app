@@ -1,24 +1,20 @@
 name: Flutter CI
+run-name: "Flutter CI executed by ${{github.actor}} 🛸"
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-  pull_request:
-    branches:
-      - main
-      - dev
+  - push
 
 jobs:
-  build-and-test:
+  flutter_ci:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: subosito/flutter-action@v2
+      id: flutter-action
       with:
+        channel: stable
         flutter-version: '3.16.9' # Specify the Flutter version
+        cache: true
 
     - name: Install dependencies
       run: flutter pub get
@@ -26,9 +22,3 @@ jobs:
     - name: Run lint checks
       run: flutter analyze
 
-    - name: Build APK
-      run: flutter build apk
-
-    - name: Build iOS
-      if: runner.os == 'macOS'
-      run: flutter build ios --no-codesign
