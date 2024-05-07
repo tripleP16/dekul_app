@@ -12,10 +12,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: subosito/flutter-action@v2
+      id: flutter-action
       with:
         channel: stable
         flutter-version: '3.16.9' # Specify the Flutter version
-        cache: false
+        cache: true
 
     - name: Install dependencies
       run: flutter pub get
@@ -23,9 +24,7 @@ jobs:
     - name: Run lint checks
       run: flutter analyze
 
-
-    - name: Check cache outputs
-      shell: bash
+    - name: Check outputs
       run: |
         echo CACHE-PATH=${{ steps.flutter-action.outputs.CACHE-PATH }}
         echo CACHE-KEY=${{ steps.flutter-action.outputs.CACHE-KEY }}
