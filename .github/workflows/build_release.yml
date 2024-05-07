@@ -37,23 +37,24 @@ jobs:
       - name: Run lint checks
         run: flutter analyze
 
-      - name: Build android apk 🤖.
+      - name: Build android apk 🤖📱.
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
         run: flutter build apk --build-name ${{github.ref_name}}
       
-      - name: Build android bundle 🤖.
+      - name: Build android bundle 🤖📦.
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
         run: flutter build appbundle --build-name ${{github.ref_name}}
 
-      - name: Build ios app 🍎.
+      - name: Build ios app 🍎📱.
         if: ${{matrix.os == 'macos-latest' && matrix.type == 'app'}}
         run: flutter build ios --release --no-codesign --build-name ${{github.ref_name}}
+      
+        # TODO: Deshabilitado, se necestia la firma desde xcode.
+        # - name: Build ios bundle 🍎📦.
+        # if: ${{matrix.os == 'macos-latest' && matrix.type == 'bundle'}}
+        # run: flutter build ipa --no-codesign --build-name ${{github.ref_name}} 
 
-      - name: Build ios bundle 🍎.
-        if: ${{matrix.os == 'macos-latest' && matrix.type == 'bundle'}}
-        run: flutter build ipa --no-codesign --build-name ${{github.ref_name}} 
-
-      - name: Include android App in github release 📦.
+      - name: Include android App in github release 🤖📱🔥.
         uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
         with: 
@@ -62,14 +63,26 @@ jobs:
           generate_release_notes: false
           make_latest: false
 
-      - name: Include android bundle in github release 📦.
+      - name: Include android bundle in github release android 🤖📦🔥.
         uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
         with:
           files: './build/app/outputs/bundle/release/app-release.aab'
 
-      - name: Include ios app in github release .
+      - name: Include ios app in github release 🍎📱🔥.
         uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'macos-latest' && matrix.type == 'app'}}
         with:
           files: './build/ios/iphoneos/Runner.app'
+
+  notify:
+    runs-on: 'ubuntu-latest'
+    needs: bulding
+    steps:
+      - name: 'Send notify in Discord (#app-releases)'
+        uses: Ilshidur/action-discord@0.3.2
+        env:
+          # TODO: webhook url in github variable
+          DISCORD_WEBHOOK: 'https://discord.com/api/webhooks/1237479849774284812/qsQM_WSBepkyDsk28U4hIpygKMKJbZKbrNGS7h_OxfNgpQJqMJRdsccilkoneDKCFgjw'
+
+

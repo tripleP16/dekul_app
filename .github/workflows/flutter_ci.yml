@@ -22,3 +22,5 @@ jobs:
     - name: Run lint checks
       run: flutter analyze
 
+    # TODO: Agregar ejecución de tests 
+
