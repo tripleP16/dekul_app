@@ -62,7 +62,7 @@ jobs:
           make_latest: false
 
       - name: Include APPBUNDLE in github release.
-        uses: softprops/actions-gh-release@v2
+        uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
         with:
           files: './build/app/outputs/bundle/release/app-release.aab'
