@@ -1,4 +1,7 @@
+import 'package:communitary_service_app/presentation/screens/login/login_form.dart';
 import 'package:flutter/material.dart';
+import 'package:formz/formz.dart';
+import 'dart:math';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = 'login';
@@ -6,9 +9,20 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Inicio de Sesión"),
+        leading: const Icon(Icons.arrow_back),
+      ),
       body: Center(
-        child: Text('Login Screen'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            LoginForm(
+              seed: Random(),
+            )
+          ],
+        ),
       ),
     );
   }
