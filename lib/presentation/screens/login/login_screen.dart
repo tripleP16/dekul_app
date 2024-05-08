@@ -1,6 +1,5 @@
 import 'package:communitary_service_app/presentation/screens/login/login_form.dart';
 import 'package:flutter/material.dart';
-import 'package:formz/formz.dart';
 import 'dart:math';
 
 class LoginScreen extends StatelessWidget {

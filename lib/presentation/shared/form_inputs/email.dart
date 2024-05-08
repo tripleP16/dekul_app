@@ -26,13 +26,4 @@ class Email extends FormzInput<String, EmailValidationError> with FormzInputErro
     }
 }
 
-extension on EmailValidationError{
-  String text() {
-    switch (this) {
-      case EmailValidationError.empty:
-        return 'Por favor introduzca un correo electrónico';
-      case EmailValidationError.invalid:
-        return '';
-    }
-  }
-}
+
