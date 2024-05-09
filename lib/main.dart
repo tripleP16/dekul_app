@@ -1,8 +1,14 @@
 import 'package:communitary_service_app/config/router/app_router.dart';
 import 'package:communitary_service_app/config/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MainApp());
 }
 

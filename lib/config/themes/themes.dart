@@ -7,10 +7,11 @@ class AppColors {
   static const Color onPrimaryContainer = Color(0xFFEDE6E6); //;
   static const Color primarySurface = Color(0xFFFAFAFA);
   static const Color secondarySurface = Color(0xFFF8EFEF);
-  static const Color onSurface20 = Color(0xFF2F0000);
+  static const Color black = Color(0xFF2F0000);
   static const Color onSurface40 = Color(0xFF4E4444);
-  static const Color onSurface60 = Color(0xFFA8ADBD);
+  static const Color disabled = Color(0xFFA8ADBD);
   static const Color background = Color(0xFFFFFCFC);
+  static const Color lightColor = Color(0xFFFDDFA6);
 }
 
 const scheme = ColorScheme.light(
@@ -21,7 +22,7 @@ const scheme = ColorScheme.light(
     primaryContainer: AppColors.primaryContainer,
     background: AppColors.background,
     surface: AppColors.primarySurface,
-    onSurface: AppColors.onSurface20,
+    onSurface: AppColors.black,
     outline: AppColors.primaryContainer);
 
 const inputTheme = InputDecorationTheme(
@@ -32,14 +33,12 @@ const inputTheme = InputDecorationTheme(
     color: Color(0xFFAD0F0F),
   ),
 );
-  
 
 const elevatedButtonTheme = ElevatedButtonThemeData(
   style: ButtonStyle(
-    foregroundColor: MaterialStatePropertyAll(Colors.white),
-    backgroundColor: MaterialStatePropertyAll(AppColors.primary),
-    overlayColor: MaterialStatePropertyAll(Color(0x7FAD0F0F))
-  ),
+      foregroundColor: MaterialStatePropertyAll(Colors.white),
+      backgroundColor: MaterialStatePropertyAll(AppColors.primary),
+      overlayColor: MaterialStatePropertyAll(Color(0x7FAD0F0F))),
 );
 
 class AppTheme {

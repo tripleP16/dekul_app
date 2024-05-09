@@ -1,6 +1,5 @@
-import 'package:communitary_service_app/presentation/screens/login/login_form.dart';
+import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = 'login';
@@ -8,24 +7,36 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Inicio de Sesión"),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
-        ),
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 35),
-        alignment: Alignment.topCenter,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LoginForm(
-              seed: Random(),
-            ),
-          ],
+    return const Scaffold(body: _LoginScreenBody());
+  }
+}
+
+class _LoginScreenBody extends StatelessWidget {
+  const _LoginScreenBody();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 70),
+                child: const MainLogoWidget(
+                  size: Size(200, 200),
+                ),
+              ),
+              VerticalSpacer.v34().createSpace(),
+              CustomElevatedButton.light(
+                onPressed: () {},
+                text: 'Iniciar sesión',
+                elevation: 2.0,
+                textSize: 16,
+              ),
+            ],
+          ),
         ),
       ),
     );
