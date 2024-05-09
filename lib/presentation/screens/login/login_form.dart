@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:formz/formz.dart';
 
+//TODO: Hacer refactor para manejar estado con bloc
+
 class LoginForm extends StatefulWidget {
   LoginForm({super.key, Random? seed}) : seed = seed ?? Random();
 
@@ -132,15 +134,18 @@ class _LoginFormState extends State<LoginForm> {
         key: _key,
         child: Column(
           children: [
-            TextFormField(
-              key: const Key('loginForm_emailInput'),
-              controller: _emailController,
-              validator: (value) => _state.email.validator(value ?? '')?.text(),
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                icon: Icon(Icons.email),
-                labelText: 'Email',
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: TextFormField(
+                key: const Key('loginForm_emailInput'),
+                controller: _emailController,
+                validator: (value) =>
+                    _state.email.validator(value ?? '')?.text(),
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                ),
               ),
             ),
             TextFormField(
@@ -151,7 +156,6 @@ class _LoginFormState extends State<LoginForm> {
               obscureText: true,
               textInputAction: TextInputAction.done,
               decoration: const InputDecoration(
-                icon: Icon(Icons.lock),
                 labelText: 'Password',
                 errorMaxLines: 2,
               ),
@@ -161,14 +165,23 @@ class _LoginFormState extends State<LoginForm> {
             ),
             _state.status.isInProgress
                 ? const CircularProgressIndicator()
-                : FilledButton(
-                    key: const Key('loginForm_submit'),
-                    onPressed: _onSubmit,
-                    style: const ButtonStyle(
-                      minimumSize: MaterialStatePropertyAll(Size(double.infinity,40))
-                    ), 
-                    child: const Text('Continuar'),
-                  ),
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ElevatedButton(
+                      key: const Key('loginForm_submit'),
+                      onPressed: _onSubmit,
+                      style: const ButtonStyle(
+                        textStyle: MaterialStatePropertyAll(
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w500)                        
+                        ) 
+                        ,
+                        minimumSize: MaterialStatePropertyAll(
+                          Size(double.infinity, 65),
+                        ),
+                      ),
+                      child: const Text('Continuar'),
+                    ),
+                  )
           ],
         ));
   }
@@ -178,7 +191,7 @@ extension on PasswordValidationError {
   String text() {
     switch (this) {
       case PasswordValidationError.invalid:
-        return 'Contraseña invalidad';
+        return 'La contraseña debe tener más de 8 caracteres';
       case PasswordValidationError.empty:
         return 'Por favor introduzca una contraseña';
     }
@@ -191,7 +204,7 @@ extension on EmailValidationError {
       case EmailValidationError.empty:
         return 'Por favor introduzca un correo electrónico';
       case EmailValidationError.invalid:
-        return 'Correo invalido';
+        return 'Introduzca el formato correcto del email';
     }
   }
 }

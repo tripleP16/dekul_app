@@ -13,25 +13,42 @@ class AppColors {
   static const Color background = Color(0xFFFFFCFC);
 }
 
-const lightScheme = ColorScheme.light(
-  brightness: Brightness.light,
-  primary: AppColors.primary,
-  onPrimary: AppColors.onPrimary,
-  onPrimaryContainer: AppColors.onPrimaryContainer,
-  primaryContainer: AppColors.primaryContainer,
-  background: AppColors.background,
-  surface: AppColors.primarySurface,
-  onSurface: AppColors.onSurface20,
-  outline: AppColors.primaryContainer
+const scheme = ColorScheme.light(
+    brightness: Brightness.light,
+    primary: AppColors.primary,
+    onPrimary: AppColors.onPrimary,
+    onPrimaryContainer: AppColors.onPrimaryContainer,
+    primaryContainer: AppColors.primaryContainer,
+    background: AppColors.background,
+    surface: AppColors.primarySurface,
+    onSurface: AppColors.onSurface20,
+    outline: AppColors.primaryContainer);
+
+const inputTheme = InputDecorationTheme(
+  border:
+      OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+  errorStyle: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Color(0xFFAD0F0F),
+  ),
+);
+  
+
+const elevatedButtonTheme = ElevatedButtonThemeData(
+  style: ButtonStyle(
+    foregroundColor: MaterialStatePropertyAll(Colors.white),
+    backgroundColor: MaterialStatePropertyAll(AppColors.primary),
+    overlayColor: MaterialStatePropertyAll(Color(0x7FAD0F0F))
+  ),
 );
 
 class AppTheme {
   ThemeData getTheme() {
     return ThemeData(
-      colorScheme: lightScheme,
-
+      colorScheme: scheme,
+      inputDecorationTheme: inputTheme,
+      elevatedButtonTheme: elevatedButtonTheme,
       useMaterial3: true,
     );
   }
 }
-
