@@ -33,6 +33,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo/
+    - .env
 
 flutter_icons:
   android: "android"
