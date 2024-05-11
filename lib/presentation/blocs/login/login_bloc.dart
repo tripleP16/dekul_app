@@ -3,6 +3,7 @@ import 'package:communitary_service_app/presentation/shared/form_inputs/password
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -24,9 +25,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onSubmitted(FormSubmitted event, Emitter<LoginState> emit) async {
-    emit(state.copyWith(
-      loginStatus: event.status,
-    ));
+    emit(
+      state.copyWith(
+        loginStatus: LoginStatus.posted,
+      ),
+    );
   }
 
   void _onEmailChanged(EmailChanged event, Emitter<LoginState> emit) {
@@ -65,7 +68,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
 
     //Simulate network call
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 1));
 
     add(FormSubmitted(
       status: LoginStatus.posted,

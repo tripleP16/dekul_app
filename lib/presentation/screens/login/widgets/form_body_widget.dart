@@ -10,33 +10,40 @@ class FormComponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        VerticalSpacer(60).createSpace(),
-        TextInputWidget(
-          labelText: 'Email',
-          onChanged: context.read<LoginBloc>().emailChanged,
-          keyboardType: TextInputType.emailAddress,
-          errorText: context.watch<LoginBloc>().state.email.errorMessage,
-        ),
-        VerticalSpacer(60).createSpace(),
-        TextInputWidget(
-          labelText: 'Contraseña',
-          keyboardType: TextInputType.visiblePassword,
-          onChanged: context.read<LoginBloc>().passwordChanged,
-          errorText: context.watch<LoginBloc>().state.password.errorMessage,
-          obscureText: true,
-        ),
-        VerticalSpacer(60).createSpace(),
-        const _SubmitButton(),
-        VerticalSpacer.v34().createSpace(),
-        const CustomTextButton.url(
-          onPressed: null,
-          text: '¿Olvidaste la contraseña?',
-          fontSize: 16,
-        )
-      ],
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state.isPosted) {}
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          VerticalSpacer(60).createSpace(),
+          TextInputWidget(
+            labelText: 'Email',
+            initialValue: context.watch<LoginBloc>().state.email.value,
+            onChanged: context.read<LoginBloc>().emailChanged,
+            keyboardType: TextInputType.emailAddress,
+            errorText: context.watch<LoginBloc>().state.email.errorMessage,
+          ),
+          VerticalSpacer(60).createSpace(),
+          TextInputWidget(
+            labelText: 'Contraseña',
+            initialValue: context.watch<LoginBloc>().state.password.value,
+            keyboardType: TextInputType.visiblePassword,
+            onChanged: context.read<LoginBloc>().passwordChanged,
+            errorText: context.watch<LoginBloc>().state.password.errorMessage,
+            obscureText: true,
+          ),
+          VerticalSpacer(60).createSpace(),
+          const _SubmitButton(),
+          VerticalSpacer.v34().createSpace(),
+          const CustomTextButton.url(
+            onPressed: null,
+            text: '¿Olvidaste la contraseña?',
+            fontSize: 16,
+          )
+        ],
+      ),
     );
   }
 }

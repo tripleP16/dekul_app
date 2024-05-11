@@ -30,4 +30,6 @@ class LoginState extends Equatable {
   }
 
   bool get isValid => Formz.validate([email, password]);
+
+  bool get isPosted => loginStatus == LoginStatus.posted;
 }
