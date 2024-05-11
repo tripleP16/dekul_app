@@ -8,6 +8,8 @@ class CustomElevatedButton extends StatelessWidget {
   final String text;
   final double elevation;
   final double textSize;
+  final double width;
+  final double height;
   final FontWeight fontWeight;
 
   const CustomElevatedButton({
@@ -17,41 +19,50 @@ class CustomElevatedButton extends StatelessWidget {
     required this.textColor,
     required this.text,
     required this.elevation,
-    required this.textSize,
     required this.fontWeight,
+    required this.width,
+    this.textSize = 16,
+    required this.height,
   });
 
   const CustomElevatedButton.light({
     Key? key,
     required void Function()? onPressed,
     required String text,
-    required double textSize,
+    double textSize = 16,
     required double elevation,
+    required double width,
+    required double height,
   }) : this(
             key: key,
             onPressed: onPressed,
             backgroundColor: AppColors.lightColor,
             textColor: AppColors.primary,
             text: text,
-            textSize: textSize,
             elevation: elevation,
-            fontWeight: FontWeight.normal);
+            fontWeight: FontWeight.normal,
+            width: width,
+            height: height);
 
   const CustomElevatedButton.dark({
     Key? key,
     required void Function()? onPressed,
     required String text,
-    required double textSize,
+    double textSize = 16,
     required double elevation,
+    required double width,
+    required double height,
   }) : this(
-            key: key,
-            onPressed: onPressed,
-            backgroundColor: AppColors.primary,
-            textColor: AppColors.onPrimary,
-            text: text,
-            textSize: textSize,
-            elevation: elevation,
-            fontWeight: FontWeight.normal);
+          key: key,
+          onPressed: onPressed,
+          backgroundColor: AppColors.primary,
+          textColor: AppColors.onPrimary,
+          text: text,
+          elevation: elevation,
+          fontWeight: FontWeight.normal,
+          width: width,
+          height: height,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +79,7 @@ class CustomElevatedButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+          padding: EdgeInsets.symmetric(horizontal: width, vertical: height),
           child: Text(text,
               style: TextStyle(
                   color: onPressed != null ? textColor : AppColors.primary,

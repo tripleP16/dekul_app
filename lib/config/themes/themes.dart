@@ -12,6 +12,8 @@ class AppColors {
   static const Color disabled = Color(0xFFA8ADBD);
   static const Color background = Color(0xFFFFFCFC);
   static const Color lightColor = Color(0xFFFDDFA6);
+  static const Color urlColor = Color(0xFF2E88D6);
+  static const Color errorColor = Colors.red;
 }
 
 const scheme = ColorScheme.light(

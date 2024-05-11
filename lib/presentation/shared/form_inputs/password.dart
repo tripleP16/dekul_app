@@ -1,22 +1,35 @@
 import 'package:formz/formz.dart';
 
-enum PasswordValidationError { invalid, empty }
+// Define input validation errors
+enum PasswordInputError { empty, length }
 
-class Password extends FormzInput<String, PasswordValidationError> {
-  const Password.pure([super.value = '']) : super.pure();
+// Extend FormzInput and provide the input type and error type.
+class Password extends FormzInput<String, PasswordInputError> {
+  // Call super.pure to represent an unmodified form input.
+  const Password.pure() : super.pure('');
 
-  const Password.dirty([super.value = '']) : super.dirty();
+  // Call super.dirty to represent a modified form input.
+  const Password.dirty(String value) : super.dirty(value);
 
-  static final _passwordRegex =
-      RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
+  String? get errorMessage {
+    if (isValid || isPure) return null;
 
-  @override
-  PasswordValidationError? validator(String value) {
-    if (value.isEmpty) {
-      return PasswordValidationError.empty;
-    } else if (!_passwordRegex.hasMatch(value)) {
-      return PasswordValidationError.invalid; 
+    if (displayError == PasswordInputError.empty) {
+      return 'La contraseña no puede estar vacía';
     }
+
+    if (displayError == PasswordInputError.length) return 'Minimo 6 caracteres';
+
+    return null;
+  }
+
+  // Override validator to handle validating a given input value.
+  @override
+  PasswordInputError? validator(String value) {
+    if (value.isEmpty || value.trim().isEmpty) return PasswordInputError.empty;
+
+    if (value.length < 6) return PasswordInputError.length;
+
     return null;
   }
 }

@@ -1,29 +1,41 @@
 import 'package:formz/formz.dart';
 
-enum EmailValidationError {
-  invalid,
-  empty
-}
+// Define input validation errors
+enum EmailInputError { empty, format }
 
-class Email extends FormzInput<String, EmailValidationError> with FormzInputErrorCacheMixin{
-  Email.pure([super.value = '']) : super.pure();
+// Extend FormzInput and provide the input type and error type.
 
-  Email.dirty([super.value = '']) : super.dirty();
+class Email extends FormzInput<String, EmailInputError> {
+  // Call super.pure to represent an unmodified form input.
+  const Email.pure() : super.pure('');
 
-  static final _emailRegExp = RegExp(
-    r'[a-zA-Z\d.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z\d-]+(?:\.[a-zA-Z\d-]+)*$'
+  static final RegExp emailRegex = RegExp(
+    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
   );
+  // Call super.dirty to represent a modified form input.
+  const Email.dirty(String value) : super.dirty(value);
 
-  @override
-    EmailValidationError? validator(String value) {
-      if (value.isEmpty){
-        return EmailValidationError.empty;
-      } else if (!_emailRegExp.hasMatch(value)) {
-        return EmailValidationError.invalid;
-      }
+  String? get errorMessage {
+    if (isValid || isPure) return null;
 
-      return null;
+    if (displayError == EmailInputError.empty) {
+      return 'El email es obligatorio';
     }
+
+    if (displayError == EmailInputError.format) {
+      return 'El correo no tiene el formato correcto';
+    }
+
+    return null;
+  }
+
+  // Override validator to handle validating a given input value.
+  @override
+  EmailInputError? validator(String value) {
+    if (value.isEmpty || value.trim().isEmpty) return EmailInputError.empty;
+
+    if (!emailRegex.hasMatch(value)) return EmailInputError.format;
+
+    return null;
+  }
 }
-
-

@@ -1,5 +1,6 @@
 import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = 'login';
@@ -30,10 +31,13 @@ class _LoginScreenBody extends StatelessWidget {
               ),
               VerticalSpacer.v34().createSpace(),
               CustomElevatedButton.light(
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/login_form');
+                },
                 text: 'Iniciar sesión',
                 elevation: 2.0,
-                textSize: 16,
+                width: 70,
+                height: 20,
               ),
             ],
           ),
