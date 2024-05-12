@@ -1,3 +1,4 @@
+import 'package:communitary_service_app/config/helpers/interceptors/token_interceptor.dart';
 import 'package:communitary_service_app/config/helpers/locator.dart';
 import 'package:communitary_service_app/config/services/contracts/environment.dart';
 import 'package:dio/dio.dart';
@@ -13,8 +14,12 @@ class DioFactory {
     },
   );
 
-
   Dio create() {
-    return Dio(baseOptions);
+    final Dio dio = Dio(baseOptions);
+
+    dio.interceptors.add(TokenInterceptor());
+    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+
+    return dio;
   }
 }
