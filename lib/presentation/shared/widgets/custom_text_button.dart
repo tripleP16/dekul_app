@@ -12,7 +12,7 @@ class CustomTextButton extends StatelessWidget {
     this.onPressed,
     required this.text,
     required this.color,
-    required this.fontSize,
+    this.fontSize = 16,
   });
 
   const CustomTextButton.url({
