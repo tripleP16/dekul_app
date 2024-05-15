@@ -14,6 +14,8 @@ class AppColors {
   static const Color lightColor = Color(0xFFFDDFA6);
   static const Color urlColor = Color(0xFF2E88D6);
   static const Color errorColor = Colors.red;
+  static const Color successColor = Color(0xFF10C46E);
+  static const Color warningColor = Color(0xFFAC9B07);
 }
 
 const scheme = ColorScheme.light(
