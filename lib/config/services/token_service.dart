@@ -6,11 +6,11 @@ class TokenService {
   static const String refreshTokenKey = 'refresh_token';
 
   static Future<String> getToken() async {
-    return await getIt<IStorageService>().read<String>(tokenKey);
+    return await getIt<IStorageService>().read<String?>(tokenKey) ?? '';
   }
 
   static Future<String> getRefreshToken() async {
-    return await getIt<IStorageService>().read<String>(refreshTokenKey);
+    return await getIt<IStorageService>().read<String?>(refreshTokenKey) ?? '';
   }
 
   static Future<void> setToken(String token) async {

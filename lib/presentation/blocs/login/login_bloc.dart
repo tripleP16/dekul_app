@@ -1,3 +1,7 @@
+import 'package:communitary_service_app/config/router/app_router.dart';
+import 'package:communitary_service_app/config/services/token_service.dart';
+import 'package:communitary_service_app/domain/models/login/login_model.dart';
+import 'package:communitary_service_app/domain/repositories/login/login_repository.dart';
 import 'package:communitary_service_app/presentation/shared/form_inputs/email.dart';
 import 'package:communitary_service_app/presentation/shared/form_inputs/password.dart';
 import 'package:equatable/equatable.dart';
@@ -8,7 +12,8 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(const LoginState.initialValue()) {
+  final LoginRepository loginRepository;
+  LoginBloc(this.loginRepository) : super(const LoginState.initialValue()) {
     on<EmailChanged>(_onEmailChanged);
 
     on<PasswordChanged>(_onPasswordChanged);
@@ -67,7 +72,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       status: LoginStatus.loading,
     ));
 
-    await Future.delayed(const Duration(seconds: 1));
+    try {
+      final input =
+          LoginModel(email: state.email.value, password: state.password.value);
+      final tokens = await loginRepository.login(input);
+      await TokenService.setRefreshToken(tokens.refreshToken);
+      await TokenService.setToken(tokens.accessToken);
+      appRouter.go('/home');
+    } catch (e) {
+      rethrow;
+    }
 
     add(FormSubmitted(
       status: LoginStatus.posted,

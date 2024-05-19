@@ -6,6 +6,7 @@ class EnvironmentService extends Environment {
   @override
   Future<void> init() async {
     await dotenv.load(fileName: '.env');
+    
   }
 
   @override

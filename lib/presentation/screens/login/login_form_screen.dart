@@ -1,3 +1,5 @@
+import 'package:communitary_service_app/config/helpers/locator.dart';
+import 'package:communitary_service_app/domain/repositories/login/login_repository.dart';
 import 'package:communitary_service_app/presentation/blocs/login/login_bloc.dart';
 import 'package:communitary_service_app/presentation/screens/login/widgets/form_body_widget.dart';
 import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
@@ -14,7 +16,11 @@ class LoginFormScreen extends StatelessWidget {
       appBar: const CustomAppBar(
         title: 'Inicio de sesión',
       ),
-      body: BlocProvider(create: (context) => LoginBloc(), child: _FormBody()),
+      body: BlocProvider(
+          create: (context) => LoginBloc(
+                getIt<LoginRepository>(),
+              ),
+          child: _FormBody()),
     );
   }
 }
