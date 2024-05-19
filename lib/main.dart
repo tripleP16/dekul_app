@@ -1,8 +1,10 @@
+import 'package:communitary_service_app/config/helpers/interceptors/refresh_token_interceptor.dart';
 import 'package:communitary_service_app/config/helpers/locator.dart';
 import 'package:communitary_service_app/config/router/app_router.dart';
-import 'package:communitary_service_app/config/services/contracts/environment.dart';
 import 'package:communitary_service_app/config/themes/themes.dart';
+import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/forms_state_cubit/forms_cubit.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +15,12 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  Locator();
-  await getIt<Environment>().init();
+  await Locator().init();
+
+  getIt<Dio>()
+      .interceptors
+      .add(RefreshTokenInterceptor(authRepository: getIt<AuthRepository>()));
+
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => FormCubit()),
   ], child: const MainApp()));
