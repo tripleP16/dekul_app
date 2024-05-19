@@ -1,4 +1,6 @@
-import 'package:communitary_service_app/presentation/shared/widgets/forms/forms.dart';
+import 'package:communitary_service_app/presentation/shared/blocs/forms_state_cubit/forms_cubit.dart';
+import 'package:communitary_service_app/presentation/shared/widgets/forms/inputs/forms.dart';
+import 'package:communitary_service_app/presentation/shared/widgets/forms/wrappers/form_wrapper.dart';
 import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,23 +54,21 @@ class _SubmitButton extends StatelessWidget {
   const _SubmitButton();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      builder: (context, state) {
-        if (state.loginStatus == LoginStatus.loading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        return CustomElevatedButton.dark(
-          onPressed: context.watch<LoginBloc>().state.isValid
-              ? () async {
-                  await context.read<LoginBloc>().submit();
-                }
-              : null,
-          text: 'Continuar',
-          width: 80,
-          height: 20,
-          elevation: 12,
-        );
-      },
+    return FormWrapper(
+      successContent: 'Se ha iniciado sesión correctamente',
+      child: CustomElevatedButton.dark(
+        onPressed: context.watch<LoginBloc>().state.isValid
+            ? () async {
+                await context.read<FormCubit>().formSubmit(
+                      context.read<LoginBloc>().submit(),
+                    );
+              }
+            : null,
+        text: 'Continuar',
+        width: 80,
+        height: 20,
+        elevation: 12,
+      ),
     );
   }
 }

@@ -67,7 +67,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       status: LoginStatus.loading,
     ));
 
-    //Simulate network call
     await Future.delayed(const Duration(seconds: 1));
 
     add(FormSubmitted(
