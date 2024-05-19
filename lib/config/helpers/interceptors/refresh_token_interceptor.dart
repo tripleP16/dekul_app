@@ -13,6 +13,8 @@ class RefreshTokenInterceptor extends Interceptor {
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
+    if (options.path.contains('refresh')) return handler.next(options);
+
     String accessToken = await TokenService.getToken();
     String refreshToken = await TokenService.getRefreshToken();
 
@@ -27,7 +29,8 @@ class RefreshTokenInterceptor extends Interceptor {
         TokenService.setToken(newAccessToken.accessToken);
         accessToken = newAccessToken.accessToken;
       } catch (e) {
-        appRouter.go('/login');
+        await TokenService.deleteTokens();
+        appRouter.go('/');
       }
     }
 
@@ -38,7 +41,7 @@ class RefreshTokenInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
-      appRouter.go('/login');
+      appRouter.go('/');
     }
 
     return handler.reject(err);

@@ -5,6 +5,6 @@ class ExpirationService {
     final expirationDate = JwtDecoder.getExpirationDate(token);
     final currentTime = DateTime.now();
     final timeDifference = expirationDate.difference(currentTime);
-    return timeDifference.inMinutes <= 5;
+    return timeDifference.inMinutes <= 45;
   }
 }

@@ -20,4 +20,9 @@ class TokenService {
   static Future<void> setRefreshToken(String refreshToken) async {
     await getIt<IStorageService>().write<String>(refreshTokenKey, refreshToken);
   }
+
+  static Future<void> deleteTokens() async {
+    await getIt<IStorageService>().delete(tokenKey);
+    await getIt<IStorageService>().delete(refreshTokenKey);
+  }
 }

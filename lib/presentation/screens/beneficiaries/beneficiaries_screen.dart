@@ -1,3 +1,4 @@
+import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class BeneficiariesScreen extends StatelessWidget {
@@ -6,6 +7,8 @@ class BeneficiariesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      appBar: CustomAppBar(title: 'Beneficiaries'),
+    );
   }
 }
