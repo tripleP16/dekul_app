@@ -4,6 +4,7 @@ import 'package:communitary_service_app/presentation/shared/widgets/forms/wrappe
 import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../blocs/login/login_bloc.dart';
 
@@ -39,8 +40,10 @@ class FormComponents extends StatelessWidget {
           VerticalSpacer(60).createSpace(),
           const _SubmitButton(),
           VerticalSpacer.v34().createSpace(),
-          const CustomTextButton.url(
-            onPressed: null,
+          CustomTextButton.url(
+            onPressed: () {
+              context.push('/forgot_password/email');
+            },
             text: '¿Olvidaste la contraseña?',
             fontSize: 16,
           )
