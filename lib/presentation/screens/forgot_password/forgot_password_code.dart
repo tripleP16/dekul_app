@@ -1,7 +1,9 @@
 import 'package:communitary_service_app/presentation/screens/forgot_password/view_models/forgot_password_body_view_model.dart';
 import 'package:communitary_service_app/presentation/screens/forgot_password/widgets/forgot_password_body.dart';
 import 'package:communitary_service_app/presentation/shared/widgets/custom_app_bar.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RecoverPasswordCodeScreen extends StatelessWidget {
   static const routeName = 'recover_password_code';
@@ -21,15 +23,35 @@ class RecoverPasswordCodeScreen extends StatelessWidget {
                 labelText: 'Codigo',
                 onChanged: (text) {},
                 errorText: null,
-                textWidget: const Text(
-                  'Si no haz recibido el codigo revisa en la carpeta de spam y en caso de no recibirlo haz click aqui',
+                textWidget: RichText(
                   textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    fontSize: 16,
+                  text: TextSpan(
+                    text:
+                        'Si no haz recibido el código revisa en la carpeta de spam y en caso de no recibirlo ',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'haz click aquí',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            print("Link clicked");
+                          },
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 buttonLabel: 'Continuar',
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/restore_password');
+                },
               ),
             ),
           ),
