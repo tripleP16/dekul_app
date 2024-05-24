@@ -35,10 +35,7 @@ class RecoverPasswordCodeScreen extends StatelessWidget {
                     children: <TextSpan>[
                       TextSpan(
                         text: 'haz click aquí',
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            print("Link clicked");
-                          },
+                        recognizer: TapGestureRecognizer()..onTap = () {},
                         style: const TextStyle(
                           fontSize: 16,
                           color: Colors.blue,
