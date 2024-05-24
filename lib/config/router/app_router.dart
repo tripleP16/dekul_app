@@ -1,5 +1,6 @@
 import 'package:communitary_service_app/config/router/guards/auth_guard.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/beneficiaries_screen.dart';
+import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_code.dart';
 import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_email.dart';
 import 'package:communitary_service_app/presentation/screens/screens.dart';
 import 'package:communitary_service_app/presentation/screens/splash/splash_screen.dart';
@@ -32,4 +33,9 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
     name: ForgotPasswordEmail.routeName,
     builder: (context, state) => const ForgotPasswordEmail(),
   ),
+  GoRoute(
+    path: '/forgot_password/code',
+    name: RecoverPasswordCodeScreen.routeName,
+    builder: (context, state) => const RecoverPasswordCodeScreen(),
+  )
 ]);
