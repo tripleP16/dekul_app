@@ -9,6 +9,7 @@ class BeneficiariesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: CustomAppBar(title: 'Beneficiaries'),
+      bottomNavigationBar: CustomBottomBar(),
     );
   }
 }

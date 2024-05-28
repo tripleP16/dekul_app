@@ -1,10 +1,10 @@
 name: communitary_service_app
 description: Project to track childrens alimentation.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
+  sdk: ">=3.1.5 <4.0.0"
 
 dependencies:
   animate_do: ^3.3.4
@@ -53,4 +53,4 @@ flutter_icons:
   remove_alpha_ios: true
 
 flutter_native_splash:
-  color: "#000000"
+  color: "#FFFFFF"

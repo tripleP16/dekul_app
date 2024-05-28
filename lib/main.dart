@@ -5,16 +5,20 @@ import 'package:communitary_service_app/config/themes/themes.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_event.dart';
+import 'package:communitary_service_app/presentation/shared/blocs/bottom_navigation_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/forms_state_cubit/forms_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'presentation/blocs/auth/auth_state.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  FlutterNativeSplash.remove();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -29,7 +33,8 @@ void main() async {
     BlocProvider(create: (_) => FormCubit()),
     BlocProvider(
       create: (context) => AuthBloc(getIt<AuthRepository>()),
-    )
+    ),
+    BlocProvider(create: (_) => BottomNavigationBarCubit()),
   ], child: const MainApp()));
 }
 

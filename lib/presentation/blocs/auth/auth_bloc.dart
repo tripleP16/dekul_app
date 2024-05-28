@@ -18,7 +18,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onAppStarted(AppStartedEvent event, Emitter<AuthState> emit) async {
     final refreshToken = await TokenService.getRefreshToken();
     final accessToken = await TokenService.getToken();
-    await Future.delayed(const Duration(seconds: 2));
     if (refreshToken.isEmpty || refreshToken == '') {
       emit(Unauthenticated());
       return;
