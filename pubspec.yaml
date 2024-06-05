@@ -44,6 +44,7 @@ flutter:
     - assets/logo/
     - .env
     - assets/lotties/
+    - assets/icon/
 
 flutter_icons:
   android: "android"
