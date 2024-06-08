@@ -5,6 +5,7 @@ import 'package:communitary_service_app/config/themes/themes.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_event.dart';
+import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_beneficiary/form_beneficiary_bloc.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/bottom_navigation_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/forms_state_cubit/forms_cubit.dart';
 import 'package:dio/dio.dart';
@@ -35,6 +36,9 @@ void main() async {
       create: (context) => AuthBloc(getIt<AuthRepository>()),
     ),
     BlocProvider(create: (_) => BottomNavigationBarCubit()),
+    BlocProvider(
+      create: (_) => FormBeneficiaryBloc(),
+    )
   ], child: const MainApp()));
 }
 

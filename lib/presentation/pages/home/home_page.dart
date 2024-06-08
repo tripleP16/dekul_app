@@ -5,6 +5,7 @@ import 'package:communitary_service_app/presentation/shared/blocs/bottom_navigat
 import 'package:communitary_service_app/presentation/shared/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   static const String routeName = 'home_page';
@@ -22,6 +23,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: const CustomBottomBar(),
       body: SizedBox(child: _pages[page.index]),
+      floatingActionButton: page == Pages.beneficiaries || page == Pages.reports
+          ? FloatingActionButton(
+              onPressed: () {
+                context.push('/beneficiaries/create');
+              },
+              child: const Icon(Icons.add))
+          : null,
     );
   }
 }

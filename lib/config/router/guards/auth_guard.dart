@@ -11,3 +11,14 @@ String? authGuard(BuildContext context, GoRouterState state) {
   }
   return null;
 }
+
+String? splashGuard(BuildContext context, GoRouterState state) {
+  final authState = context.watch<AuthBloc>().state;
+  if (authState is Authenticated) {
+    return '/home';
+  }
+  if (authState is Unauthenticated) {
+    return '/login';
+  }
+  return null;
+}

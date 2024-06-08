@@ -37,7 +37,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
 
     emit(Authenticated());
-    appRouter.go('/home');
   }
 
   void _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {

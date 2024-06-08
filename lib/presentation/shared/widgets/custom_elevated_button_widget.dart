@@ -7,7 +7,6 @@ class CustomElevatedButton extends StatelessWidget {
   final Color textColor;
   final String text;
   final double elevation;
-  final double textSize;
   final double width;
   final double height;
   final FontWeight fontWeight;
@@ -21,7 +20,6 @@ class CustomElevatedButton extends StatelessWidget {
     required this.elevation,
     required this.fontWeight,
     required this.width,
-    this.textSize = 16,
     required this.height,
   });
 
@@ -29,7 +27,6 @@ class CustomElevatedButton extends StatelessWidget {
     Key? key,
     required void Function()? onPressed,
     required String text,
-    double textSize = 16,
     required double elevation,
     required double width,
     required double height,
@@ -48,7 +45,6 @@ class CustomElevatedButton extends StatelessWidget {
     Key? key,
     required void Function()? onPressed,
     required String text,
-    double textSize = 16,
     required double elevation,
     required double width,
     required double height,
@@ -66,25 +62,29 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ElevatedButton(
-        style: ButtonStyle(
-          elevation: MaterialStatePropertyAll<double>(elevation),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return AppColors.disabled;
-            }
-            return backgroundColor;
-          }),
+      style: ButtonStyle(
+        elevation: WidgetStatePropertyAll<double>(elevation),
+        backgroundColor:
+            WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.disabled;
+          }
+          return backgroundColor;
+        }),
+      ),
+      onPressed: onPressed,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: width, vertical: height),
+        child: Text(
+          text,
+          style: theme.textTheme.bodyLarge!.copyWith(
+            color: onPressed != null ? textColor : AppColors.primary,
+            fontWeight: fontWeight,
+          ),
         ),
-        onPressed: onPressed,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width, vertical: height),
-          child: Text(text,
-              style: TextStyle(
-                  color: onPressed != null ? textColor : AppColors.primary,
-                  fontWeight: fontWeight,
-                  fontSize: textSize)),
-        ));
+      ),
+    );
   }
 }

@@ -55,7 +55,6 @@ class Locator {
   }
 
   Future<void> _initializeDio() async {
-    // Ensure that the Environment service is initialized before creating Dio
     final environment = getIt<Environment>();
     await environment.init();
     await getIt<IStorageService>().init();

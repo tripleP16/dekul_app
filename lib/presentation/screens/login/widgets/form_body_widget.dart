@@ -45,7 +45,6 @@ class FormComponents extends StatelessWidget {
               context.push('/forgot_password/email');
             },
             text: '¿Olvidaste la contraseña?',
-            fontSize: 16,
           )
         ],
       ),

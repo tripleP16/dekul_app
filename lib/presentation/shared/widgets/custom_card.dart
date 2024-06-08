@@ -27,7 +27,7 @@ class CustomCard extends StatelessWidget {
       color: AppColors.onPrimary,
       elevation: 2,
       child: SizedBox(
-        height: size.height * 0.37,
+        height: size.height * 0.42,
         width: size.width,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),

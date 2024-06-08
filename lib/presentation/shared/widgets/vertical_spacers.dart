@@ -41,5 +41,7 @@ class VerticalSpacer {
 
   VerticalSpacer.v34() : height = 34;
 
+  VerticalSpacer.v36() : height = 36;
+
   SizedBox createSpace() => SizedBox(height: height);
 }

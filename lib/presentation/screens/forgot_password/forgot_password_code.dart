@@ -11,6 +11,7 @@ class RecoverPasswordCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: const CustomAppBar(title: 'Codigo de recuperación'),
       body: Padding(
@@ -28,16 +29,13 @@ class RecoverPasswordCodeScreen extends StatelessWidget {
                   text: TextSpan(
                     text:
                         'Si no haz recibido el código revisa en la carpeta de spam y en caso de no recibirlo ',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
+                    style: theme.textTheme.bodyLarge!
+                        .copyWith(color: Colors.black),
                     children: <TextSpan>[
                       TextSpan(
                         text: 'haz click aquí',
                         recognizer: TapGestureRecognizer()..onTap = () {},
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: theme.textTheme.bodyLarge!.copyWith(
                           color: Colors.blue,
                           decoration: TextDecoration.underline,
                         ),

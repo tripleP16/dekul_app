@@ -1,4 +1,3 @@
-import 'package:communitary_service_app/config/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class TextInputWidget extends StatelessWidget {
@@ -10,6 +9,10 @@ class TextInputWidget extends StatelessWidget {
   final String? initialValue;
   final TextInputType keyboardType;
   final void Function(String) onChanged;
+  final Widget? prefixIcon;
+  final VoidCallback? onTap;
+  final bool readOnly;
+  final TextEditingController? controller;
 
   const TextInputWidget({
     super.key,
@@ -21,23 +24,31 @@ class TextInputWidget extends StatelessWidget {
     this.initialValue,
     this.keyboardType = TextInputType.text,
     required this.onChanged,
+    this.prefixIcon,
+    this.onTap,
+    this.readOnly = false,
+    this.controller,
   });
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return TextFormField(
+      controller: controller,
+      readOnly: readOnly,
+      onTap: onTap,
       obscureText: obscureText,
       initialValue: initialValue,
       onChanged: onChanged,
       keyboardType: keyboardType,
-      style: const TextStyle(fontSize: 18),
+      style: theme.textTheme.bodyLarge,
       decoration: InputDecoration(
-          labelStyle: const TextStyle(fontSize: 18),
-          hintStyle: const TextStyle(fontSize: 18),
+          labelStyle: theme.textTheme.bodyLarge,
+          hintStyle: theme.textTheme.bodyLarge,
           labelText: labelText,
           errorText: errorText,
           hintText: hintText,
-          errorStyle:
-              const TextStyle(color: AppColors.errorColor, fontSize: 16)),
+          prefixIcon: prefixIcon,
+          errorStyle: theme.textTheme.bodyMedium!.copyWith(color: Colors.red)),
       validator: validator,
     );
   }
