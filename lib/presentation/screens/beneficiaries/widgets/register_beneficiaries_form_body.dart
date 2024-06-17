@@ -26,6 +26,7 @@ class RegisterBeneficiariesFormBody extends StatelessWidget {
           ),
           VerticalSpacer.v36().createSpace(),
           TextInputWidget(
+            initialValue: formBeneficiaryState.beneficiaryName.value,
             labelText: 'Nombres',
             onChanged: (p0) => formBeneficiary.changeName(p0),
             errorText: formBeneficiaryState.beneficiaryName.errorMessage,
@@ -33,6 +34,7 @@ class RegisterBeneficiariesFormBody extends StatelessWidget {
           VerticalSpacer.v36().createSpace(),
           TextInputWidget(
             labelText: 'Apellidos',
+            initialValue: formBeneficiaryState.beneficiaryLastname.value,
             onChanged: (p0) => formBeneficiary.changeLastName(p0),
             errorText: formBeneficiaryState.beneficiaryLastname.errorMessage,
           ),
@@ -48,7 +50,7 @@ class RegisterBeneficiariesFormBody extends StatelessWidget {
               final date = await showDatePicker(
                 context: context,
                 firstDate: DateTime(1900),
-                lastDate: DateTime(DateTime.now().year - 1),
+                lastDate: DateTime(DateTime.now().year),
               );
               if (date != null) {
                 formBeneficiary.birthdayChanged(date);
@@ -78,7 +80,7 @@ class RegisterBeneficiariesFormBody extends StatelessWidget {
             groupValue2: formBeneficiaryState.beneficiaryGender.value,
             errorMessage: formBeneficiaryState.beneficiaryGender.errorMessage,
           ),
-          VerticalSpacer.v36().createSpace(),
+          const Spacer(),
           CustomElevatedButton.light(
             onPressed: () {
               formBeneficiary.submit();

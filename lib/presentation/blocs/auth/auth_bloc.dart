@@ -18,22 +18,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onAppStarted(AppStartedEvent event, Emitter<AuthState> emit) async {
     final refreshToken = await TokenService.getRefreshToken();
     final accessToken = await TokenService.getToken();
-    if (refreshToken.isEmpty || refreshToken == '') {
+
+    if (refreshToken.isEmpty || accessToken.isEmpty) {
+      await TokenService.deleteTokens();
       emit(Unauthenticated());
       return;
     }
-
-    if (ExpirationService.isTokenAboutToExpire(refreshToken)) {
-      emit(Unauthenticated());
-      return;
-    }
-
-    if (accessToken.isEmpty || accessToken == '') {
-      await _refreshTokens();
-    }
-
-    if (ExpirationService.isTokenAboutToExpire(accessToken)) {
-      await _refreshTokens();
+    if (ExpirationService.isTokenAboutToExpire(refreshToken) ||
+        ExpirationService.isTokenAboutToExpire(accessToken)) {
+      try {
+        await _refreshTokens();
+      } catch (e) {
+        await TokenService.deleteTokens();
+        emit(Unauthenticated());
+        return;
+      }
     }
 
     emit(Authenticated());

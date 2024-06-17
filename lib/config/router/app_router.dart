@@ -1,5 +1,6 @@
 import 'package:communitary_service_app/config/router/guards/auth_guard.dart';
 import 'package:communitary_service_app/presentation/pages/home/home_page.dart';
+import 'package:communitary_service_app/presentation/screens/beneficiaries/medical_history_screen.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/register_beneficiaries_screen.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/register_parent_screen.dart';
 import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_code.dart';
@@ -59,6 +60,12 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
       redirect: authGuard,
       name: RegisterParentScreen.routeName,
       builder: (context, state) => const RegisterParentScreen(),
+    ),
+    GoRoute(
+      path: 'medical_history',
+      redirect: authGuard,
+      name: MedicalHistoryScreen.routeName,
+      builder: (context, state) => const MedicalHistoryScreen(),
     ),
   ])
 ]);

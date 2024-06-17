@@ -26,7 +26,7 @@ class CustomStepper extends StatelessWidget {
           width: width,
           height: size.height * 0.02,
           decoration: BoxDecoration(
-            color: AppColors.alertColor,
+            color: AppColors.primary,
             borderRadius: BorderRadius.circular(25),
           ),
         ),

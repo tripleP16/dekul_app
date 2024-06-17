@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextInputWidget extends StatelessWidget {
+class TextInputWidget extends StatefulWidget {
   final String labelText;
   final String? errorText;
   final String? Function(String?)? validator;
@@ -29,27 +29,40 @@ class TextInputWidget extends StatelessWidget {
     this.readOnly = false,
     this.controller,
   });
+
+  @override
+  State<TextInputWidget> createState() => _TextInputWidgetState();
+}
+
+class _TextInputWidgetState extends State<TextInputWidget> {
+  final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.text = widget.initialValue ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return TextFormField(
-      controller: controller,
-      readOnly: readOnly,
-      onTap: onTap,
-      obscureText: obscureText,
-      initialValue: initialValue,
-      onChanged: onChanged,
-      keyboardType: keyboardType,
+      controller: widget.controller ?? _controller,
+      readOnly: widget.readOnly,
+      onTap: widget.onTap,
+      obscureText: widget.obscureText,
+      onChanged: widget.onChanged,
+      keyboardType: widget.keyboardType,
       style: theme.textTheme.bodyLarge,
       decoration: InputDecoration(
           labelStyle: theme.textTheme.bodyLarge,
           hintStyle: theme.textTheme.bodyLarge,
-          labelText: labelText,
-          errorText: errorText,
-          hintText: hintText,
-          prefixIcon: prefixIcon,
+          labelText: widget.labelText,
+          errorText: widget.errorText,
+          hintText: widget.hintText,
+          prefixIcon: widget.prefixIcon,
           errorStyle: theme.textTheme.bodyMedium!.copyWith(color: Colors.red)),
-      validator: validator,
+      validator: widget.validator,
     );
   }
 }

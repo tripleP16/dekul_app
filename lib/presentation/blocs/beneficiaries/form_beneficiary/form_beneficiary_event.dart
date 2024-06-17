@@ -16,6 +16,7 @@ class NameChanged extends FormBeneficiaryEvent {
 class LastnameChanged extends FormBeneficiaryEvent {
   final String lastname;
   final FormBeneficiaryStatus status;
+
   LastnameChanged({
     required this.lastname,
     required this.status,
@@ -35,6 +36,7 @@ class BirthdayChanged extends FormBeneficiaryEvent {
 class GenderChanged extends FormBeneficiaryEvent {
   final Gender gender;
   final FormBeneficiaryStatus status;
+
   GenderChanged({
     required this.gender,
     required this.status,
@@ -44,6 +46,7 @@ class GenderChanged extends FormBeneficiaryEvent {
 class PlayingSportsChanged extends FormBeneficiaryEvent {
   final bool playingSports;
   final FormBeneficiaryStatus status;
+
   PlayingSportsChanged({
     required this.playingSports,
     required this.status,
@@ -52,6 +55,7 @@ class PlayingSportsChanged extends FormBeneficiaryEvent {
 
 class FormPosted extends FormBeneficiaryEvent {
   final FormBeneficiaryStatus status;
+
   FormPosted({
     required this.status,
   });
@@ -59,7 +63,10 @@ class FormPosted extends FormBeneficiaryEvent {
 
 class FormReset extends FormBeneficiaryEvent {
   final FormBeneficiaryStatus status;
+
   FormReset({
     required this.status,
   });
 }
+
+class FormIsValid extends FormBeneficiaryEvent {}

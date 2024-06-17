@@ -18,6 +18,7 @@ class FormBeneficiaryBloc
     on<PlayingSportsChanged>(_onPlayingSportsChanged);
     on<FormPosted>(_onFormPosted);
     on<FormReset>(_onFormReset);
+    on<FormIsValid>(_onFormIsValid);
   }
 
   void _onNameChanged(NameChanged event, Emitter<FormBeneficiaryState> emit) {
@@ -80,8 +81,12 @@ class FormBeneficiaryBloc
     );
 
     if (state.isValid) {
-      appRouter.push('/beneficiaries/parent');
+      add(FormIsValid());
     }
+  }
+
+  void _onFormIsValid(FormIsValid event, Emitter<FormBeneficiaryState> emit) {
+    appRouter.push('/beneficiaries/parent');
   }
 
   void _onFormReset(FormReset event, Emitter<FormBeneficiaryState> emit) {
