@@ -1,24 +1,22 @@
-import 'package:communitary_service_app/presentation/shared/widgets/forms/inputs/forms.daRT';
+import 'package:communitary_service_app/presentation/shared/widgets/forms/inputs/autocomplete_widgets/autocomplete_body.dart';
+import 'package:communitary_service_app/presentation/shared/widgets/forms/inputs/autocomplete_widgets/chips_show.dart';
+import 'package:communitary_service_app/presentation/shared/widgets/view_models/autocomplete_with_chips_view_model.dart';
 import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class AutocompleteWithChips extends StatelessWidget {
-  const AutocompleteWithChips({super.key});
+  final AutocompleteWithChipsViewModel viewModel;
+
+  const AutocompleteWithChips({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Wrap(
-            runAlignment: WrapAlignment.start,
-            runSpacing: 2,
-            spacing: 8,
-            children: []),
-        TextInputWidget(
-          labelText: 'Alergias',
-          onChanged: (p0) {},
-        ),
+        ChipsShow(viewModel: viewModel),
+        AutoCompleteBody(viewModel: viewModel),
         VerticalSpacer.v36().createSpace(),
       ],
     );

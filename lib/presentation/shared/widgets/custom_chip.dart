@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class CustomChip extends StatelessWidget {
   final CustomChipViewModel viewModel;
+  final VoidCallback onDelete;
 
   const CustomChip({
     super.key,
     required this.viewModel,
+    required this.onDelete,
   });
 
   @override
@@ -18,7 +20,7 @@ class CustomChip extends StatelessWidget {
         size: 20,
         color: AppColors.primary,
       ),
-      onDeleted: viewModel.onDelete,
+      onDeleted: onDelete,
       label: Text(viewModel.label),
     );
   }

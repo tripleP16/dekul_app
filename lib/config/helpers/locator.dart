@@ -11,14 +11,18 @@ import 'package:communitary_service_app/config/services/impl/shared_preferences_
 import 'package:communitary_service_app/config/services/impl/snackbars_service_impl.dart';
 import 'package:communitary_service_app/domain/datasources/auth/auth_datasource.dart';
 import 'package:communitary_service_app/domain/datasources/login/login_datasource.dart';
+import 'package:communitary_service_app/domain/repositories/allergies/allergy_repository.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
 import 'package:communitary_service_app/domain/repositories/login/login_repository.dart';
+import 'package:communitary_service_app/infraestructure/datasources/allergies/allergies_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/auth/auth_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/login/login_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/auth/auth_repository_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/login/login_repository_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../infraestructure/repositories/allergies/allergies_repository_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -48,6 +52,14 @@ class Locator {
 
     getIt.registerLazySingleton<AuthRepository>(
         () => AuthRepositoryImpl(datasource: getIt<AuthDatasource>()));
+
+    getIt.registerLazySingleton<AllergiesDatasourceImpl>(
+        () => AllergiesDatasourceImpl(apiService: getIt<IApiService>()));
+
+    getIt.registerLazySingleton<AllergiesRepository>(
+      () => AllergiesRepositoryImpl(
+          allergiesDataSource: getIt<AllergiesDatasourceImpl>()),
+    );
   }
 
   Future<void> _setupAsyncServices() async {

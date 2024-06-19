@@ -2,7 +2,9 @@ import 'package:communitary_service_app/config/helpers/interceptors/refresh_toke
 import 'package:communitary_service_app/config/helpers/locator.dart';
 import 'package:communitary_service_app/config/router/app_router.dart';
 import 'package:communitary_service_app/config/themes/themes.dart';
+import 'package:communitary_service_app/domain/repositories/allergies/allergy_repository.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
+import 'package:communitary_service_app/presentation/blocs/allergies/allergies_cubit.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_event.dart';
 import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_beneficiary/form_beneficiary_bloc.dart';
@@ -42,7 +44,11 @@ void main() async {
     ),
     BlocProvider(
       create: (_) => FormParentBloc(),
-    )
+    ),
+    BlocProvider(
+        create: (_) => AllergiesCubit(
+              getIt<AllergiesRepository>(),
+            ))
   ], child: const MainApp()));
 }
 

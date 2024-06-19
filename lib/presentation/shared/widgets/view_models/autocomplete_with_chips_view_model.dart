@@ -1,7 +1,9 @@
-class AutocompleteWithChipsViewModel<T> {
-  final List<T> items;
-  final Function(T) onSelected;
-  final Function(T) onDelete;
+import 'package:communitary_service_app/presentation/shared/widgets/view_models/custom_chip_view_model.dart';
+
+class AutocompleteWithChipsViewModel {
+  final List<CustomChipViewModel> items;
+  final Function(CustomChipViewModel) onSelected;
+  final Function(CustomChipViewModel) onDelete;
   final String labelText;
   final String hintText;
 
