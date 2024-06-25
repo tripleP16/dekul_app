@@ -57,3 +57,7 @@ flutter_icons:
 
 flutter_native_splash:
   color: "#FFFFFF"
+
+analyzer:
+  exclude:
+    - .env
