@@ -13,8 +13,11 @@ jobs:
         id: flutter-action
         with:
           channel: stable
-          flutter-version: "3.16.9" # Specify the Flutter version
+          flutter-version: "3.22.1" # Specify the Flutter version
           cache: true
+
+      - name: Create empty .env file
+        run: touch .env
 
       - name: Install dependencies
         run: flutter pub get

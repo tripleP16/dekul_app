@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static const Color primary = Color(0xFF340000);
@@ -25,7 +26,6 @@ const scheme = ColorScheme.light(
     onPrimary: AppColors.onPrimary,
     onPrimaryContainer: AppColors.onPrimaryContainer,
     primaryContainer: AppColors.primaryContainer,
-    background: AppColors.background,
     surface: AppColors.primarySurface,
     onSurface: AppColors.black,
     outline: AppColors.primaryContainer);
@@ -41,14 +41,15 @@ const inputTheme = InputDecorationTheme(
 
 const elevatedButtonTheme = ElevatedButtonThemeData(
   style: ButtonStyle(
-      foregroundColor: MaterialStatePropertyAll(Colors.white),
-      backgroundColor: MaterialStatePropertyAll(AppColors.primary),
-      overlayColor: MaterialStatePropertyAll(Color(0x7FAD0F0F))),
+      foregroundColor: WidgetStatePropertyAll(Colors.white),
+      backgroundColor: WidgetStatePropertyAll(AppColors.primary),
+      overlayColor: WidgetStatePropertyAll(Color(0x7FAD0F0F))),
 );
 
 class AppTheme {
   ThemeData getTheme() {
     return ThemeData(
+      fontFamily: GoogleFonts.montserrat().fontFamily,
       colorScheme: scheme,
       inputDecorationTheme: inputTheme,
       elevatedButtonTheme: elevatedButtonTheme,

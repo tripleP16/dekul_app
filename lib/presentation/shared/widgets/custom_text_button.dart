@@ -5,33 +5,34 @@ class CustomTextButton extends StatelessWidget {
   final void Function()? onPressed;
   final String text;
   final Color color;
-  final double fontSize;
 
   const CustomTextButton({
     super.key,
     this.onPressed,
     required this.text,
     required this.color,
-    this.fontSize = 16,
   });
 
   const CustomTextButton.url({
     Key? key,
     required void Function()? onPressed,
     required String text,
-    required double fontSize,
   }) : this(
-            key: key,
-            color: AppColors.urlColor,
-            onPressed: onPressed,
-            text: text,
-            fontSize: fontSize);
+          key: key,
+          color: AppColors.urlColor,
+          onPressed: onPressed,
+          text: text,
+        );
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return TextButton(
       onPressed: onPressed,
-      child: Text(text, style: TextStyle(fontSize: fontSize, color: color)),
+      child: Text(text,
+          style: theme.textTheme.bodyLarge!.copyWith(
+            color: color,
+          )),
     );
   }
 }

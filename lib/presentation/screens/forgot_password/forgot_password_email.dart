@@ -10,6 +10,7 @@ class ForgotPasswordEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: const CustomAppBar(title: 'Recuperacion de contraseña'),
       body: Padding(
@@ -22,12 +23,10 @@ class ForgotPasswordEmail extends StatelessWidget {
                 labelText: 'Email',
                 onChanged: (text) {},
                 errorText: null,
-                textWidget: const Text(
+                textWidget: Text(
                   'A continuacion te llegara un correo con un codigo a introducir con el fin de restablecer tu contraseña ',
                   textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+                  style: theme.textTheme.bodyLarge,
                 ),
                 buttonLabel: 'Continuar',
                 onPressed: () {

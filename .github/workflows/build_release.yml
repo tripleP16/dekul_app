@@ -2,12 +2,12 @@ name: Build release
 run-name: Bulding release ${{github.ref_name}} 🪚
 
 on:
-   release:
-      types: [published]
+  release:
+    types: [ published ]
 permissions:
   contents: write
 
-jobs:   
+jobs:
   building:
     strategy:
       matrix:
@@ -20,15 +20,15 @@ jobs:
     
     runs-on: ${{matrix.os}}
 
-    steps: 
+    steps:
       - name: Setup repo
         uses: actions/checkout@v4
 
       - name: Setup flutter on ${{matrix.os}}
-        uses: subosito/flutter-action@v2 
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.16.9'
+          flutter-version: '3.22.1'
           cache: true
 
       - name: Install dependecies
@@ -40,7 +40,7 @@ jobs:
       - name: Build android apk 🤖📱.
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
         run: flutter build apk --build-name ${{github.ref_name}}
-      
+
       - name: Build android bundle 🤖📦.
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'bundle'}}
         run: flutter build appbundle --build-name ${{github.ref_name}}
@@ -48,7 +48,7 @@ jobs:
       - name: Build ios app 🍎📱.
         if: ${{matrix.os == 'macos-latest' && matrix.type == 'app'}}
         run: flutter build ios --release --no-codesign --build-name ${{github.ref_name}}
-      
+
         # TODO: Deshabilitado, se necestia la firma desde xcode.
         # - name: Build ios bundle 🍎📦.
         # if: ${{matrix.os == 'macos-latest' && matrix.type == 'bundle'}}
@@ -57,7 +57,7 @@ jobs:
       - name: Include android App in github release 🤖📱🔥.
         uses: softprops/action-gh-release@v2
         if: ${{matrix.os == 'ubuntu-latest' && matrix.type == 'app'}}
-        with: 
+        with:
           files: './build/app/outputs/flutter-apk/app-release.apk'
 
       - name: Include android bundle in github release android 🤖📦🔥.
