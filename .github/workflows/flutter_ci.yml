@@ -13,7 +13,7 @@ jobs:
         id: flutter-action
         with:
           channel: stable
-          flutter-version: "3.19.4" # Specify the Flutter version
+          flutter-version: "3.22.1" # Specify the Flutter version
           cache: true
 
       - name: Install dependencies
