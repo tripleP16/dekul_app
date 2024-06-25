@@ -17,7 +17,18 @@ class ChipsShow extends StatelessWidget {
         runSpacing: 2,
         spacing: 8,
         children: [
-          Text('Alergias ${viewModel.items.length}'),
+          ..._buildChips(),
         ]);
+  }
+
+  List<Widget> _buildChips() {
+    return viewModel.selectedItems.map((item) {
+      return Chip(
+        label: Text(item.label),
+        onDeleted: () {
+          viewModel.onDelete(item);
+        },
+      );
+    }).toList();
   }
 }

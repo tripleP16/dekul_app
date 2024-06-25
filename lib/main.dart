@@ -4,11 +4,14 @@ import 'package:communitary_service_app/config/router/app_router.dart';
 import 'package:communitary_service_app/config/themes/themes.dart';
 import 'package:communitary_service_app/domain/repositories/allergies/allergy_repository.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
+import 'package:communitary_service_app/domain/repositories/beneficiaries/beneficiaries_repository.dart';
 import 'package:communitary_service_app/presentation/blocs/allergies/allergies_cubit.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_event.dart';
 import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_beneficiary/form_beneficiary_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_parent/form_parent_bloc.dart';
+import 'package:communitary_service_app/presentation/blocs/beneficiaries/medical_history_form/medical_history_form_bloc.dart';
+import 'package:communitary_service_app/presentation/blocs/beneficiaries/register/register_beneficiary_bloc.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/bottom_navigation_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/forms_state_cubit/forms_cubit.dart';
 import 'package:dio/dio.dart';
@@ -48,7 +51,22 @@ void main() async {
     BlocProvider(
         create: (_) => AllergiesCubit(
               getIt<AllergiesRepository>(),
-            ))
+            )),
+    BlocProvider(
+      create: (_) => MedicalHistoryFormBloc(),
+    ),
+    BlocProvider(create: (context) {
+      final beneficiary = context.read<FormBeneficiaryBloc>();
+      final parent = context.read<FormParentBloc>();
+      final medicalHistory = context.read<MedicalHistoryFormBloc>();
+      final beneficiariesRepository = getIt<BeneficiariesRepository>();
+      return RegisterBeneficiaryBloc(
+        beneficiary,
+        parent,
+        medicalHistory,
+        beneficiariesRepository,
+      );
+    })
   ], child: const MainApp()));
 }
 

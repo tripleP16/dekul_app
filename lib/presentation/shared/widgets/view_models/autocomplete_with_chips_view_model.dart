@@ -2,6 +2,7 @@ import 'package:communitary_service_app/presentation/shared/widgets/view_models/
 
 class AutocompleteWithChipsViewModel {
   final List<CustomChipViewModel> items;
+  final List<CustomChipViewModel> selectedItems;
   final Function(CustomChipViewModel) onSelected;
   final Function(CustomChipViewModel) onDelete;
   final String labelText;
@@ -13,5 +14,6 @@ class AutocompleteWithChipsViewModel {
     required this.onDelete,
     required this.labelText,
     required this.hintText,
+    required this.selectedItems,
   });
 }

@@ -6,10 +6,19 @@ import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegisterBeneficiariesFormBody extends StatelessWidget {
+class RegisterBeneficiariesFormBody extends StatefulWidget {
   const RegisterBeneficiariesFormBody({
     super.key,
   });
+
+  @override
+  State<RegisterBeneficiariesFormBody> createState() =>
+      _RegisterBeneficiariesFormBodyState();
+}
+
+class _RegisterBeneficiariesFormBodyState
+    extends State<RegisterBeneficiariesFormBody> {
+  final birthdayController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +50,7 @@ class RegisterBeneficiariesFormBody extends StatelessWidget {
           VerticalSpacer.v36().createSpace(),
           TextInputWidget(
             labelText: 'Fecha de Nacimiento',
-            hintText: formBeneficiaryState.beneficiaryBirthday.value != null
-                ? DateFormatService.formatDate(
-                    formBeneficiaryState.beneficiaryBirthday.value!)
-                : null,
+            controller: birthdayController,
             readOnly: true,
             onTap: () async {
               final date = await showDatePicker(
@@ -54,6 +60,7 @@ class RegisterBeneficiariesFormBody extends StatelessWidget {
               );
               if (date != null) {
                 formBeneficiary.birthdayChanged(date);
+                birthdayController.text = DateFormatService.formatDate(date);
               }
             },
             onChanged: (value) {},
@@ -87,7 +94,7 @@ class RegisterBeneficiariesFormBody extends StatelessWidget {
             },
             text: 'Continuar',
             elevation: 3,
-            width: 20,
+            width: 100,
             height: 10,
           )
         ],

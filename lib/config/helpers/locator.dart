@@ -13,6 +13,7 @@ import 'package:communitary_service_app/domain/datasources/auth/auth_datasource.
 import 'package:communitary_service_app/domain/datasources/login/login_datasource.dart';
 import 'package:communitary_service_app/domain/repositories/allergies/allergy_repository.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
+import 'package:communitary_service_app/domain/repositories/beneficiaries/beneficiaries_repository.dart';
 import 'package:communitary_service_app/domain/repositories/login/login_repository.dart';
 import 'package:communitary_service_app/infraestructure/datasources/allergies/allergies_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/auth/auth_datasource_impl.dart';
@@ -22,7 +23,10 @@ import 'package:communitary_service_app/infraestructure/repositories/login/login
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../domain/datasources/beneficiaries/beneficiaries_datasource.dart';
+import '../../infraestructure/datasources/beneficiaries/beneficiaries_datasource_impl.dart';
 import '../../infraestructure/repositories/allergies/allergies_repository_impl.dart';
+import '../../infraestructure/repositories/beneficiaries/beneficiaries_repository_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -59,6 +63,15 @@ class Locator {
     getIt.registerLazySingleton<AllergiesRepository>(
       () => AllergiesRepositoryImpl(
           allergiesDataSource: getIt<AllergiesDatasourceImpl>()),
+    );
+
+    getIt.registerLazySingleton<BeneficiariesDatasource>(
+        () => BeneficiariesDatasourceImpl(apiService: getIt<IApiService>()));
+
+    getIt.registerLazySingleton<BeneficiariesRepository>(
+      () => BeneficiariesRepositoryImpl(
+        getIt<BeneficiariesDatasource>(),
+      ),
     );
   }
 

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../view_models/custom_chip_view_model.dart';
 
 class PreviewChipWidget extends StatelessWidget {
+  final List<CustomChipViewModel> optionsList;
+  final Function(CustomChipViewModel) onTapped;
+
   const PreviewChipWidget({
     super.key,
     required this.optionsList,
     required this.onTapped,
   });
-
-  final List<CustomChipViewModel> optionsList;
-  final VoidCallback onTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class PreviewChipWidget extends StatelessWidget {
       alignment: Alignment.topLeft,
       child: Material(
         elevation: 4,
-        child: Container(
+        child: SizedBox(
           width: size.width * 0.5,
           child: ListView.builder(
             shrinkWrap: true,
@@ -28,7 +28,9 @@ class PreviewChipWidget extends StatelessWidget {
               final option = optionsList[index];
               return ListTile(
                 title: Text(option.label),
-                onTap: onTapped,
+                onTap: () {
+                  onTapped(option);
+                },
               );
             },
           ),

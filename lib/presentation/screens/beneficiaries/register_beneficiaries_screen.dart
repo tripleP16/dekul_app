@@ -1,4 +1,4 @@
-import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_beneficiary/form_beneficiary_bloc.dart';
+import 'package:communitary_service_app/presentation/blocs/beneficiaries/register/register_beneficiary_bloc.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/widgets/register_beneficiaries_form_body.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/widgets/register_beneficiary_page.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class RegisterBeneficiariesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvoked: (didPop) {
-        context.read<FormBeneficiaryBloc>().reset();
+        context.read<RegisterBeneficiaryBloc>().reset();
       },
       child: const RegisterBeneficiaryPage(
         title: 'Registro de Beneficiarios',

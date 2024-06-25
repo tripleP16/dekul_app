@@ -23,10 +23,12 @@ class _AutoCompleteBodyState extends State<AutoCompleteBody> {
       final optionsList = options.toList();
 
       return PreviewChipWidget(
-          optionsList: optionsList,
-          onTapped: () {
-            _controller.text = '';
-          });
+        optionsList: optionsList,
+        onTapped: (p0) {
+          widget.viewModel.onSelected(p0);
+          _controller.clear();
+        },
+      );
     }, optionsBuilder: (TextEditingValue text) {
       return widget.viewModel.items
           .where((element) =>

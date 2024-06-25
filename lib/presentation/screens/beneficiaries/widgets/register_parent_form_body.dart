@@ -47,7 +47,7 @@ class RegisterParentFormBody extends StatelessWidget {
             },
             text: 'Continuar',
             elevation: 2,
-            width: 10,
+            width: 100,
             height: 10,
           ),
         ],
