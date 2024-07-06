@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class TextInputWidget extends StatefulWidget {
   final String labelText;
   final String? errorText;
+  final double? borderRadius;
   final String? Function(String?)? validator;
   final bool obscureText;
   final String? hintText;
@@ -10,6 +11,7 @@ class TextInputWidget extends StatefulWidget {
   final TextInputType keyboardType;
   final void Function(String) onChanged;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final VoidCallback? onTap;
   final bool readOnly;
   final TextEditingController? controller;
@@ -17,6 +19,7 @@ class TextInputWidget extends StatefulWidget {
   const TextInputWidget({
     super.key,
     required this.labelText,
+    this.borderRadius,
     this.errorText,
     this.validator,
     this.obscureText = false,
@@ -24,6 +27,7 @@ class TextInputWidget extends StatefulWidget {
     this.initialValue,
     this.keyboardType = TextInputType.text,
     required this.onChanged,
+    this.suffixIcon,
     this.prefixIcon,
     this.onTap,
     this.readOnly = false,
@@ -55,8 +59,12 @@ class _TextInputWidgetState extends State<TextInputWidget> {
       keyboardType: widget.keyboardType,
       style: theme.textTheme.bodyLarge,
       decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+          ),
           labelStyle: theme.textTheme.bodyLarge,
           hintStyle: theme.textTheme.bodyLarge,
+          suffixIcon: widget.suffixIcon,
           labelText: widget.labelText,
           errorText: widget.errorText,
           hintText: widget.hintText,

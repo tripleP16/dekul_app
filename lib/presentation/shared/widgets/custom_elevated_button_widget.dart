@@ -60,6 +60,25 @@ class CustomElevatedButton extends StatelessWidget {
           height: height,
         );
 
+  const CustomElevatedButton.grey({
+    Key? key,
+    required void Function()? onPressed,
+    required String text,
+    required double elevation,
+    required double width,
+    required double height,
+  }) : this(
+          key: key,
+          onPressed: onPressed,
+          backgroundColor: AppColors.greyColor,
+          textColor: AppColors.primary,
+          text: text,
+          elevation: elevation,
+          fontWeight: FontWeight.normal,
+          width: width,
+          height: height,
+        );
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

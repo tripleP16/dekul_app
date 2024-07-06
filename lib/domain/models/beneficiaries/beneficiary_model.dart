@@ -4,6 +4,7 @@ import 'package:communitary_service_app/domain/models/medicalHistory/medical_his
 import '../allergies/allergies_model.dart';
 
 class BeneficiaryModel {
+  final String id;
   final String name;
   final String lastname;
   final DateTime birthday;
@@ -14,6 +15,7 @@ class BeneficiaryModel {
   final List<AllergiesModel> allergies;
 
   const BeneficiaryModel({
+    required this.id,
     required this.name,
     required this.lastname,
     required this.birthday,
@@ -23,4 +25,6 @@ class BeneficiaryModel {
     required this.medicalHistory,
     required this.allergies,
   });
+
+  int get age => DateTime.now().year - birthday.year;
 }

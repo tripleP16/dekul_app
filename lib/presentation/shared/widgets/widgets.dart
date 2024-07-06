@@ -3,6 +3,7 @@ export './custom_bottom_bar.dart';
 export './custom_card.dart';
 export './custom_chip.dart';
 export './custom_elevated_button_widget.dart';
+export './custom_search_bar.dart';
 export './custom_stepper.dart';
 export './custom_text_button.dart';
 export './main_logo_widget.dart';

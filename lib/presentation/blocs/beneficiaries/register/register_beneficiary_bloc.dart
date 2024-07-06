@@ -38,6 +38,7 @@ class RegisterBeneficiaryBloc
 
   BeneficiaryModel _fromStateToModel() {
     return BeneficiaryModel(
+      id: '',
       name: formBeneficiaryBloc.state.beneficiaryName.value,
       lastname: formBeneficiaryBloc.state.beneficiaryLastname.value,
       birthday: formBeneficiaryBloc.state.beneficiaryBirthday.value!,
