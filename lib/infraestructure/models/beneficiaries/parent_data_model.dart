@@ -27,4 +27,10 @@ class ParentDataModel {
       phoneNumber: domain.phoneNumber,
     );
   }
+
+  ParentModel toDomain() => ParentModel(
+        name: name,
+        lastname: lastname,
+        phoneNumber: phoneNumber,
+      );
 }

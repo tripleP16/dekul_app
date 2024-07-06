@@ -28,4 +28,10 @@ class MedicalHistoryDataModel {
       createdAt: domain.createdAt,
     );
   }
+
+  MedicalHistoryModel toDomain() => MedicalHistoryModel(
+        height: height,
+        weight: weight,
+        createdAt: createdAt,
+      );
 }

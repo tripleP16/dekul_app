@@ -22,4 +22,11 @@ class AllergiesDataModel {
         id: id,
         name: name,
       );
+
+  factory AllergiesDataModel.fromDomain(AllergiesModel domain) {
+    return AllergiesDataModel(
+      id: domain.id,
+      name: domain.name,
+    );
+  }
 }
