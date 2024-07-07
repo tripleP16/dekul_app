@@ -1,7 +1,7 @@
 import 'package:communitary_service_app/config/router/app_router.dart';
 import 'package:communitary_service_app/domain/models/beneficiaries/beneficiary_model.dart';
 import 'package:communitary_service_app/domain/models/beneficiaries/parent_model.dart';
-import 'package:communitary_service_app/domain/models/medicalHistory/medical_history_model.dart';
+import 'package:communitary_service_app/domain/models/medical_history/medical_history_model.dart';
 import 'package:communitary_service_app/domain/repositories/beneficiaries/beneficiaries_repository.dart';
 import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_beneficiary/form_beneficiary_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_parent/form_parent_bloc.dart';

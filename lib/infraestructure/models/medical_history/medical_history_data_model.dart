@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../domain/models/medicalHistory/medical_history_model.dart';
+import '../../../domain/models/medical_history/medical_history_model.dart';
 
 part 'medical_history_data_model.g.dart';
 

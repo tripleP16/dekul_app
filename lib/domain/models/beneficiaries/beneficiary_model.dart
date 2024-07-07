@@ -1,5 +1,5 @@
 import 'package:communitary_service_app/domain/models/beneficiaries/parent_model.dart';
-import 'package:communitary_service_app/domain/models/medicalHistory/medical_history_model.dart';
+import 'package:communitary_service_app/domain/models/medical_history/medical_history_model.dart';
 
 import '../allergies/allergies_model.dart';
 

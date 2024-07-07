@@ -21,6 +21,7 @@ class RecoverPasswordCodeScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: FogotPasswordBody(
               viewModel: ForgotPasswordBodyViewModel(
+                initialValue: '',
                 labelText: 'Codigo',
                 onChanged: (text) {},
                 errorText: null,

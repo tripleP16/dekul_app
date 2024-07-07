@@ -22,6 +22,7 @@ class FogotPasswordBody extends StatelessWidget {
           labelText: viewModel.labelText,
           onChanged: viewModel.onChanged,
           errorText: viewModel.errorText,
+          initialValue: viewModel.initialValue,
         ),
         const Spacer(
           flex: 1,

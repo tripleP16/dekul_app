@@ -7,6 +7,7 @@ class ForgotPasswordBodyViewModel {
   final Widget textWidget;
   final String buttonLabel;
   final void Function()? onPressed;
+  final String? initialValue;
 
   const ForgotPasswordBodyViewModel({
     required this.labelText,
@@ -15,5 +16,6 @@ class ForgotPasswordBodyViewModel {
     required this.textWidget,
     required this.buttonLabel,
     required this.onPressed,
+    required this.initialValue,
   });
 }
