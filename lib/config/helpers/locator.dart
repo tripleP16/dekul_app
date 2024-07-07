@@ -10,15 +10,19 @@ import 'package:communitary_service_app/config/services/impl/environment_service
 import 'package:communitary_service_app/config/services/impl/shared_preferences_storage_service.dart';
 import 'package:communitary_service_app/config/services/impl/snackbars_service_impl.dart';
 import 'package:communitary_service_app/domain/datasources/auth/auth_datasource.dart';
+import 'package:communitary_service_app/domain/datasources/forgot_password/forgot_password_datasource.dart';
 import 'package:communitary_service_app/domain/datasources/login/login_datasource.dart';
 import 'package:communitary_service_app/domain/repositories/allergies/allergy_repository.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
 import 'package:communitary_service_app/domain/repositories/beneficiaries/beneficiaries_repository.dart';
+import 'package:communitary_service_app/domain/repositories/forgot_password/forgot_password_repository.dart';
 import 'package:communitary_service_app/domain/repositories/login/login_repository.dart';
 import 'package:communitary_service_app/infraestructure/datasources/allergies/allergies_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/auth/auth_datasource_impl.dart';
+import 'package:communitary_service_app/infraestructure/datasources/forgot_password/forgot_password_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/login/login_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/auth/auth_repository_impl.dart';
+import 'package:communitary_service_app/infraestructure/repositories/forgot_password/forgot_password_repository_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/login/login_repository_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -71,6 +75,16 @@ class Locator {
     getIt.registerLazySingleton<BeneficiariesRepository>(
       () => BeneficiariesRepositoryImpl(
         getIt<BeneficiariesDatasource>(),
+      ),
+    );
+
+    getIt.registerLazySingleton<ForgotPasswordDatasource>(
+      () => ForgotPasswordDatasourceImpl(apiService: getIt<IApiService>()),
+    );
+
+    getIt.registerLazySingleton<ForgotPasswordRepository>(
+      () => ForgotPasswordRepositoryImpl(
+        datasource: getIt<ForgotPasswordDatasource>(),
       ),
     );
   }

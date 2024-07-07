@@ -1,6 +1,6 @@
 import 'package:communitary_service_app/domain/models/beneficiaries/beneficiary_model.dart';
 import 'package:communitary_service_app/infraestructure/models/beneficiaries/parent_data_model.dart';
-import 'package:communitary_service_app/infraestructure/models/medicalHistory/medical_history_data_model.dart';
+import 'package:communitary_service_app/infraestructure/models/medical_history/medical_history_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/shared/base_id_data_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
