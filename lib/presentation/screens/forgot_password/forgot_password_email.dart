@@ -1,5 +1,5 @@
-import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_bloc.dart';
-import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_state.dart';
+import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_bloc/create_code_bloc.dart';
+import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_bloc/create_code_state.dart';
 import 'package:communitary_service_app/presentation/screens/forgot_password/view_models/forgot_password_body_view_model.dart';
 import 'package:communitary_service_app/presentation/screens/forgot_password/widgets/forgot_password_body.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/forms_state_cubit/forms_cubit.dart';

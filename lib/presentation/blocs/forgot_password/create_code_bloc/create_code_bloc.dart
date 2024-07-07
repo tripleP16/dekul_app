@@ -1,7 +1,7 @@
 import 'package:communitary_service_app/domain/models/forgot_password/create_code_model.dart';
 import 'package:communitary_service_app/domain/repositories/forgot_password/forgot_password_repository.dart';
-import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_event.dart';
-import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_state.dart';
+import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_bloc/create_code_event.dart';
+import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_bloc/create_code_state.dart';
 import 'package:communitary_service_app/presentation/shared/form_inputs/email.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';

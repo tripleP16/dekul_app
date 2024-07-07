@@ -13,7 +13,9 @@ import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_be
 import 'package:communitary_service_app/presentation/blocs/beneficiaries/form_parent/form_parent_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/beneficiaries/medical_history_form/medical_history_form_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/beneficiaries/register/register_beneficiary_bloc.dart';
-import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_bloc.dart';
+import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_bloc/create_code_bloc.dart';
+import 'package:communitary_service_app/presentation/blocs/forgot_password/restore_password/reset_password_bloc.dart';
+import 'package:communitary_service_app/presentation/blocs/forgot_password/validate_code_bloc/validate_code_bloc.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/bottom_navigation_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/forms_state_cubit/forms_cubit.dart';
 import 'package:dio/dio.dart';
@@ -41,9 +43,13 @@ void main() async {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => FormCubit()),
     BlocProvider(
-      create: (context) => AuthBloc(getIt<AuthRepository>()),
+      create: (context) => AuthBloc(
+        getIt<AuthRepository>(),
+      ),
     ),
-    BlocProvider(create: (_) => BottomNavigationBarCubit()),
+    BlocProvider(
+      create: (_) => BottomNavigationBarCubit(),
+    ),
     BlocProvider(
       create: (_) => FormBeneficiaryBloc(),
     ),
@@ -61,7 +67,17 @@ void main() async {
       create: (context) => CreateCodeBloc(
         getIt<ForgotPasswordRepository>(),
       ),
-      
+    ),
+    BlocProvider(
+      create: (context) => ResetPasswordBloc(
+        getIt<ForgotPasswordRepository>(),
+      ),
+    ),
+    BlocProvider(
+      create: (context) => ValidateCodeBloc(
+        getIt<ForgotPasswordRepository>(),
+        context.read<ResetPasswordBloc>(),
+      ),
     ),
     BlocProvider(create: (context) {
       final beneficiary = context.read<FormBeneficiaryBloc>();
