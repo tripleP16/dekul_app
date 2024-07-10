@@ -55,5 +55,19 @@ class VerticalSpacer {
 
   VerticalSpacer.v48() : height = 48;
 
+  VerticalSpacer.v50() : height = 50;
+
+  VerticalSpacer.v52() : height = 52;
+
+  VerticalSpacer.v54() : height = 54;
+
+  VerticalSpacer.v56() : height = 56;
+
+  VerticalSpacer.v58() : height = 58;
+
+  VerticalSpacer.v60() : height = 60;
+
+  VerticalSpacer.v62() : height = 62;
+
   SizedBox createSpace() => SizedBox(height: height);
 }
