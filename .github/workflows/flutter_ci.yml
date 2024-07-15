@@ -8,17 +8,24 @@ jobs:
   flutter_ci:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: subosito/flutter-action@v2
-      id: flutter-action
-      with:
-        channel: stable
-        flutter-version: '3.16.9' # Specify the Flutter version
-        cache: true
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        id: flutter-action
+        with:
+          channel: stable
+          flutter-version: "3.22.1" # Specify the Flutter version
+          cache: true
 
-    - name: Install dependencies
-      run: flutter pub get
+      - name: Create empty .env file
+        run: touch .env
 
-    - name: Run lint checks
-      run: flutter analyze
+      - name: Install dependencies
+        run: flutter pub get
 
+      - name: Run auto-generated code
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Run lint checks
+        run: flutter analyze
+
+    # TODO: Agregar ejecución de tests
