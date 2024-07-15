@@ -1,5 +1,6 @@
 import 'package:communitary_service_app/domain/datasources/allergies/allergies_datasource.dart';
 import 'package:communitary_service_app/domain/models/allergies/allergies_model.dart';
+import 'package:communitary_service_app/domain/models/allergies/create_allergy_model.dart';
 import 'package:communitary_service_app/domain/repositories/allergies/allergy_repository.dart';
 
 class AllergiesRepositoryImpl implements AllergiesRepository {
@@ -11,5 +12,10 @@ class AllergiesRepositoryImpl implements AllergiesRepository {
   @override
   Future<List<AllergiesModel>> getAllergies() {
     return _allergiesDataSource.getAllergies();
+  }
+
+  @override
+  Future<void> createAllergy(CreateAllergyModel model) {
+    return _allergiesDataSource.createAllergy(model);
   }
 }

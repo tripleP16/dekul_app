@@ -2,8 +2,10 @@ import 'package:communitary_service_app/config/helpers/list_converter.dart';
 import 'package:communitary_service_app/config/services/contracts/api_service.dart';
 import 'package:communitary_service_app/domain/datasources/allergies/allergies_datasource.dart';
 import 'package:communitary_service_app/domain/models/allergies/allergies_model.dart';
+import 'package:communitary_service_app/domain/models/allergies/create_allergy_model.dart';
 import 'package:communitary_service_app/infraestructure/errors/custom_error.dart';
 import 'package:communitary_service_app/infraestructure/models/allergies/allergies_data_model.dart';
+import 'package:communitary_service_app/infraestructure/models/allergies/create_allergy_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/shared/base_response_data_model.dart';
 import 'package:dio/dio.dart';
 
@@ -43,6 +45,25 @@ class AllergiesDatasourceImpl implements AllergiesDataSource {
         return 'No hay alergias disponibles';
       default:
         return 'Intente mas tarde';
+    }
+  }
+
+  @override
+  Future<void> createAllergy(CreateAllergyModel model) async {
+    try {
+      final dataModel = CreateAllergyDataModel.fromDomain(model);
+
+      await _apiService.post(url: 'alergies', body: {
+        'alergies': [dataModel.toJson()]
+      });
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 409) {
+        throw CustomError(message: 'Alergia ya existente');
+      }
+      if (e.response?.statusCode == 403) {
+        throw CustomError(message: 'No tienes permisos para crear una alergia');
+      }
+      throw CustomError(message: _handleDioException(e));
     }
   }
 }

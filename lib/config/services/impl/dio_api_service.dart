@@ -12,7 +12,6 @@ class DioApiService implements IApiService {
       Map<String, dynamic>? params,
       Map<String, dynamic>? body,
       Map<String, String>? headers}) {
-    
     return _dio.delete(url,
         queryParameters: params,
         data: body,
@@ -34,7 +33,6 @@ class DioApiService implements IApiService {
       Map<String, dynamic>? params,
       Map<String, dynamic>? body,
       Map<String, String>? headers}) {
-    
     return _dio.patch(url,
         queryParameters: params,
         data: body,
@@ -45,9 +43,8 @@ class DioApiService implements IApiService {
   Future post(
       {required String url,
       Map<String, dynamic>? params,
-      Map<String, dynamic>? body,
+      dynamic body,
       Map<String, String>? headers}) {
-    
     return _dio.post(url,
         queryParameters: params,
         data: body,
@@ -60,7 +57,6 @@ class DioApiService implements IApiService {
       Map<String, dynamic>? params,
       Map<String, dynamic>? body,
       Map<String, String>? headers}) {
-    
     return _dio.put(url,
         queryParameters: params,
         data: body,
