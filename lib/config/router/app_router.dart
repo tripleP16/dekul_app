@@ -1,5 +1,6 @@
 import 'package:communitary_service_app/config/router/guards/auth_guard.dart';
 import 'package:communitary_service_app/presentation/pages/home/home_page.dart';
+import 'package:communitary_service_app/presentation/screens/alergies/alergies_screen.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/medical_history_screen.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/register_beneficiaries_screen.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/register_parent_screen.dart';
@@ -48,24 +49,34 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
     name: ForgotPasswordScreen.routeName,
     builder: (context, state) => const ForgotPasswordScreen(),
   ),
-  GoRoute(path: '/beneficiaries', redirect: authGuard, routes: [
-    GoRoute(
-      path: 'create',
-      redirect: authGuard,
-      name: RegisterBeneficiariesScreen.routeName,
-      builder: (context, state) => const RegisterBeneficiariesScreen(),
-    ),
-    GoRoute(
-      path: 'parent',
-      redirect: authGuard,
-      name: RegisterParentScreen.routeName,
-      builder: (context, state) => const RegisterParentScreen(),
-    ),
-    GoRoute(
-      path: 'medical_history',
-      redirect: authGuard,
-      name: MedicalHistoryScreen.routeName,
-      builder: (context, state) => const MedicalHistoryScreen(),
-    ),
-  ])
+  GoRoute(
+    path: '/beneficiaries',
+    redirect: authGuard,
+    routes: [
+      GoRoute(
+        path: 'create',
+        redirect: authGuard,
+        name: RegisterBeneficiariesScreen.routeName,
+        builder: (context, state) => const RegisterBeneficiariesScreen(),
+      ),
+      GoRoute(
+        path: 'parent',
+        redirect: authGuard,
+        name: RegisterParentScreen.routeName,
+        builder: (context, state) => const RegisterParentScreen(),
+      ),
+      GoRoute(
+        path: 'medical_history',
+        redirect: authGuard,
+        name: MedicalHistoryScreen.routeName,
+        builder: (context, state) => const MedicalHistoryScreen(),
+      ),
+    ],
+  ),
+  GoRoute(
+    path: '/create/alergies',
+    redirect: authGuard,
+    name: AlergiesScreen.routeName,
+    builder: (context, state) => const AlergiesScreen(),
+  )
 ]);

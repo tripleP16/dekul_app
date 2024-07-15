@@ -8,7 +8,7 @@ abstract class IApiService {
   Future<dynamic> post({
     required String url,
     Map<String, dynamic>? params,
-    Map<String, dynamic>? body,
+    dynamic body,
     Map<String, String>? headers,
   });
 

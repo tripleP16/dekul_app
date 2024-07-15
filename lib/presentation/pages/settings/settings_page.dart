@@ -4,6 +4,7 @@ import 'package:communitary_service_app/presentation/pages/settings/widgets/sett
 import 'package:communitary_service_app/presentation/shared/widgets/vertical_spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -42,7 +43,9 @@ class SettingsPage extends StatelessWidget {
               SettingsCard(
                 icon: Icons.add,
                 title: 'Agregar alergia',
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/create/alergies');
+                },
               ),
               VerticalSpacer.v60().createSpace(),
               SettingsCard(
