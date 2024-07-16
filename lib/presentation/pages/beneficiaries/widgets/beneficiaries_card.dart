@@ -1,6 +1,7 @@
 import 'package:communitary_service_app/domain/models/beneficiaries/beneficiary_model.dart';
 import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../config/themes/themes.dart';
 
@@ -17,6 +18,11 @@ class BeneficiariesCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: ListTile(
+        onTap: () {
+          context.push(
+            '/beneficiaries/details/${beneficiary.id}',
+          );
+        },
         tileColor: AppColors.greyColor.withOpacity(0.4),
         title: Text(
           '${beneficiary.name} ${beneficiary.lastname}',

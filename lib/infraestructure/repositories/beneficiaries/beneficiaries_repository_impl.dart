@@ -1,5 +1,6 @@
 import 'package:communitary_service_app/domain/datasources/beneficiaries/beneficiaries_datasource.dart';
 import 'package:communitary_service_app/domain/models/beneficiaries/beneficiary_model.dart';
+import 'package:communitary_service_app/domain/models/beneficiaries/get_beneficiary_model.dart';
 import 'package:communitary_service_app/domain/models/shared/list_paginated_model.dart';
 import 'package:communitary_service_app/domain/models/shared/pagination_and_search_model.dart';
 
@@ -19,5 +20,10 @@ class BeneficiariesRepositoryImpl implements BeneficiariesRepository {
   Future<ListPaginatedModel<BeneficiaryModel>>
       getBeneficiariesWithSearchPaginated(PaginationAndSearchModel query) {
     return _beneficiariesDataSource.getBeneficiariesWithSearchPaginated(query);
+  }
+
+  @override
+  Future<GetBeneficiaryModel> getBeneficiary(String beneficiaryId) {
+    return _beneficiariesDataSource.getBeneficiary(beneficiaryId);
   }
 }

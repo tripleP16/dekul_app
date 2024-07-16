@@ -1,4 +1,5 @@
 import 'package:communitary_service_app/domain/models/beneficiaries/beneficiary_model.dart';
+import 'package:communitary_service_app/domain/models/beneficiaries/get_beneficiary_model.dart';
 import 'package:communitary_service_app/infraestructure/models/allergies/allergies_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/beneficiaries/parent_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/medical_history/medical_history_data_model.dart';
@@ -17,6 +18,7 @@ class GetBeneficiariesDataModel {
   final ParentDataModel parent;
   final List<MedicalHistoryDataModel> medicalHistories;
   final List<AllergiesDataModel> alergies;
+  final bool? needsMedicalHistoryUpdate;
 
   GetBeneficiariesDataModel({
     required this.id,
@@ -28,6 +30,7 @@ class GetBeneficiariesDataModel {
     required this.parent,
     required this.medicalHistories,
     required this.alergies,
+    required this.needsMedicalHistoryUpdate,
   });
 
   factory GetBeneficiariesDataModel.fromJson(Map<String, dynamic> json) =>
@@ -50,8 +53,22 @@ class GetBeneficiariesDataModel {
       alergies: domain.allergies
           .map((e) => AllergiesDataModel.fromDomain(e))
           .toList(),
+      needsMedicalHistoryUpdate: false,
     );
   }
+
+  GetBeneficiaryModel toGetDomain() => GetBeneficiaryModel(
+        id: id,
+        name: name,
+        lastname: lastname,
+        birthday: birthday,
+        isPlayingSports: isPlayingSports,
+        gender: gender,
+        parent: parent.toDomain(),
+        medicalHistory: medicalHistories.map((e) => e.toDomain()).toList(),
+        allergies: alergies.map((e) => e.toDomain()).toList(),
+        needsMedicalHistoryUpdate: needsMedicalHistoryUpdate ?? false,
+      );
 
   BeneficiaryModel toDomain() => BeneficiaryModel(
         id: id,

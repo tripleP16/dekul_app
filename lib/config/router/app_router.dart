@@ -1,9 +1,10 @@
 import 'package:communitary_service_app/config/router/guards/auth_guard.dart';
 import 'package:communitary_service_app/presentation/pages/home/home_page.dart';
 import 'package:communitary_service_app/presentation/screens/alergies/alergies_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/medical_history_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/register_beneficiaries_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/register_parent_screen.dart';
+import 'package:communitary_service_app/presentation/screens/beneficiaries/beneficiary_detail/beneficiary_details_screen.dart';
+import 'package:communitary_service_app/presentation/screens/beneficiaries/create_beneficiary/medical_history_screen.dart';
+import 'package:communitary_service_app/presentation/screens/beneficiaries/create_beneficiary/register_beneficiaries_screen.dart';
+import 'package:communitary_service_app/presentation/screens/beneficiaries/create_beneficiary/register_parent_screen.dart';
 import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_code.dart';
 import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_email.dart';
 import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_screen.dart';
@@ -70,6 +71,14 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
         redirect: authGuard,
         name: MedicalHistoryScreen.routeName,
         builder: (context, state) => const MedicalHistoryScreen(),
+      ),
+      GoRoute(
+        path: 'details/:id',
+        redirect: authGuard,
+        name: BeneficiaryDetailsScreen.routeName,
+        builder: (context, state) => BeneficiaryDetailsScreen(
+          id: state.pathParameters['id'] ?? '',
+        ),
       ),
     ],
   ),
