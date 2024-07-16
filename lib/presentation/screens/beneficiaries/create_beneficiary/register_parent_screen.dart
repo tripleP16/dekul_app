@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../config/helpers/alert_dialog_service.dart';
-import '../../blocs/beneficiaries/register/register_beneficiary_bloc.dart';
+import '../../../../config/helpers/alert_dialog_service.dart';
+import '../../../blocs/beneficiaries/register/register_beneficiary_bloc.dart';
 
 class RegisterParentScreen extends StatelessWidget {
   static const routeName = 'register_parent';
