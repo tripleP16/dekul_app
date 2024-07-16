@@ -7,6 +7,7 @@ import '../../../../config/themes/themes.dart';
 
 class BeneficiariesCard extends StatelessWidget {
   final BeneficiaryModel beneficiary;
+
   const BeneficiariesCard({
     super.key,
     required this.beneficiary,
@@ -46,11 +47,13 @@ class BeneficiariesCard extends StatelessWidget {
               text: 'Editar',
               onPressed: () {},
             ),
-            const SizedBox(width: 10),
-            const Badge(
-              smallSize: 20,
-              offset: Offset(100, 100),
-            ),
+            if (beneficiary.needsMedicalHistoryUpdate ?? false) ...[
+              const SizedBox(width: 10),
+              const Badge(
+                smallSize: 20,
+                offset: Offset(100, 100),
+              ),
+            ]
           ],
         ),
       ),

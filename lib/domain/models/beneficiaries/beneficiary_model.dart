@@ -13,6 +13,7 @@ class BeneficiaryModel {
   final ParentModel parent;
   final MedicalHistoryModel medicalHistory;
   final List<AllergiesModel> allergies;
+  final bool? needsMedicalHistoryUpdate;
 
   const BeneficiaryModel({
     required this.id,
@@ -24,6 +25,7 @@ class BeneficiaryModel {
     required this.parent,
     required this.medicalHistory,
     required this.allergies,
+    this.needsMedicalHistoryUpdate,
   });
 
   int get age => DateTime.now().year - birthday.year;

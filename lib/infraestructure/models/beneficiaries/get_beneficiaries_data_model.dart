@@ -80,5 +80,6 @@ class GetBeneficiariesDataModel {
         parent: parent.toDomain(),
         medicalHistory: medicalHistories.first.toDomain(),
         allergies: alergies.map((e) => e.toDomain()).toList(),
+        needsMedicalHistoryUpdate: needsMedicalHistoryUpdate ?? false,
       );
 }
