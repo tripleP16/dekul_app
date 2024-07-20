@@ -58,4 +58,16 @@ class UsersDatasourceImpl implements UsersDatasource {
         return 'Intente mas tarde';
     }
   }
+
+  @override
+  Future<void> deleteUser(String userId) async {
+    try {
+      await _apiService.delete(url: 'users/delete/$userId');
+    } on DioException catch (e) {
+      throw CustomError(message: _handleDioException(e));
+    } catch (e) {
+      throw CustomError(
+          message: 'Error en el servidor por favor intente mas tarde');
+    }
+  }
 }

@@ -10,7 +10,15 @@ class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
   UsersListBloc(this.repository) : super(UsersListState.initial()) {
     on<LoadUsersListEventNextPage>(_onLoadUsersNextPage);
     on<LoadUsersListWithSearchQuery>(_onLoadUsersWithSearchQuery);
+    on<DeleteUserEvent>(_onDeleteUser);
     add(LoadUsersListEventNextPage(nextPage: 1));
+  }
+
+  Future<void> _onDeleteUser(
+    DeleteUserEvent event,
+    Emitter<UsersListState> emit,
+  ) async {
+    await repository.deleteUser(event.userId);
   }
 
   Future<void> _onLoadUsersWithSearchQuery(
@@ -87,5 +95,11 @@ class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
 
   void search(String query) {
     add(LoadUsersListWithSearchQuery(page: 1, searchQuery: query));
+  }
+
+  void deleteUser(String userId) {
+    add(
+      DeleteUserEvent(userId: userId),
+    );
   }
 }

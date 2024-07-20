@@ -15,4 +15,9 @@ class UsersRepositoryImpl implements UsersRepository {
       PaginationAndSearchModel model) {
     return usersDatasource.fetchUsers(model);
   }
+
+  @override
+  Future<void> deleteUser(String userId) {
+    return usersDatasource.deleteUser(userId);
+  }
 }

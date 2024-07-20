@@ -8,6 +8,14 @@ class LoadUsersListEventNextPage extends UsersListEvent {
   });
 }
 
+class DeleteUserEvent extends UsersListEvent {
+  final String userId;
+
+  DeleteUserEvent({
+    required this.userId,
+  });
+}
+
 class LoadUsersListWithSearchQuery extends UsersListEvent {
   final String searchQuery;
   final int page;
