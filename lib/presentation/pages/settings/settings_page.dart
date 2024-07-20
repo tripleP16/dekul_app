@@ -30,8 +30,10 @@ class SettingsPage extends StatelessWidget {
               VerticalSpacer.v60().createSpace(),
               SettingsCard(
                 icon: Icons.group,
-                title: 'User Control',
-                onPressed: () {},
+                title: 'Control de usuarios',
+                onPressed: () {
+                  context.push('/user_control');
+                },
               ),
               VerticalSpacer.v60().createSpace(),
               SettingsCard(

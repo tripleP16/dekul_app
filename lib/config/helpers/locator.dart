@@ -1,29 +1,35 @@
 import 'package:communitary_service_app/config/services/contracts/alert_dialog_service.dart';
 import 'package:communitary_service_app/config/services/contracts/api_service.dart';
 import 'package:communitary_service_app/config/services/contracts/environment.dart';
+import 'package:communitary_service_app/config/services/contracts/permissions_service.dart';
 import 'package:communitary_service_app/config/services/contracts/snackbars_service.dart';
 import 'package:communitary_service_app/config/services/contracts/storage_service.dart';
 import 'package:communitary_service_app/config/services/dio_factory.dart';
 import 'package:communitary_service_app/config/services/impl/alert_dialog_service_impl.dart';
 import 'package:communitary_service_app/config/services/impl/dio_api_service.dart';
 import 'package:communitary_service_app/config/services/impl/environment_service.dart';
+import 'package:communitary_service_app/config/services/impl/permissions_service_impl.dart';
 import 'package:communitary_service_app/config/services/impl/shared_preferences_storage_service.dart';
 import 'package:communitary_service_app/config/services/impl/snackbars_service_impl.dart';
 import 'package:communitary_service_app/domain/datasources/auth/auth_datasource.dart';
 import 'package:communitary_service_app/domain/datasources/forgot_password/forgot_password_datasource.dart';
 import 'package:communitary_service_app/domain/datasources/login/login_datasource.dart';
+import 'package:communitary_service_app/domain/datasources/users/users_datasource.dart';
 import 'package:communitary_service_app/domain/repositories/allergies/allergy_repository.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
 import 'package:communitary_service_app/domain/repositories/beneficiaries/beneficiaries_repository.dart';
 import 'package:communitary_service_app/domain/repositories/forgot_password/forgot_password_repository.dart';
 import 'package:communitary_service_app/domain/repositories/login/login_repository.dart';
+import 'package:communitary_service_app/domain/repositories/users/users_repository.dart';
 import 'package:communitary_service_app/infraestructure/datasources/allergies/allergies_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/auth/auth_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/forgot_password/forgot_password_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/login/login_datasource_impl.dart';
+import 'package:communitary_service_app/infraestructure/datasources/users/users_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/auth/auth_repository_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/forgot_password/forgot_password_repository_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/login/login_repository_impl.dart';
+import 'package:communitary_service_app/infraestructure/repositories/users/users_repository_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -49,12 +55,21 @@ class Locator {
 
     // Initialize async services
     await _setupAsyncServices();
-    // Register services that depend on async services
-    getIt.registerLazySingleton<IApiService>(() => DioApiService(getIt<Dio>()));
+    getIt.registerLazySingleton<IApiService>(
+      () => DioApiService(
+        getIt<Dio>(),
+      ),
+    );
     getIt.registerSingleton<LoginDatasource>(
-        LoginDatasourceImpl(apiService: getIt<IApiService>()));
+      LoginDatasourceImpl(
+        apiService: getIt<IApiService>(),
+      ),
+    );
     getIt.registerLazySingleton<AuthDatasource>(
-        () => AuthDatasourceImpl(apiService: getIt<IApiService>()));
+      () => AuthDatasourceImpl(
+        apiService: getIt<IApiService>(),
+      ),
+    );
     getIt.registerLazySingleton<LoginRepository>(
         () => LoginRepositoryImpl(datasource: getIt<LoginDatasource>()));
 
@@ -77,7 +92,6 @@ class Locator {
         getIt<BeneficiariesDatasource>(),
       ),
     );
-
     getIt.registerLazySingleton<ForgotPasswordDatasource>(
       () => ForgotPasswordDatasourceImpl(apiService: getIt<IApiService>()),
     );
@@ -86,6 +100,21 @@ class Locator {
       () => ForgotPasswordRepositoryImpl(
         datasource: getIt<ForgotPasswordDatasource>(),
       ),
+    );
+    getIt.registerLazySingleton<UsersDatasource>(
+      () => UsersDatasourceImpl(
+        apiService: getIt<IApiService>(),
+      ),
+    );
+
+    getIt.registerLazySingleton<UsersRepository>(
+      () => UsersRepositoryImpl(
+        usersDatasource: getIt<UsersDatasource>(),
+      ),
+    );
+
+    getIt.registerLazySingleton<PermissionsService>(
+      () => PermissionsServiceImpl(),
     );
   }
 

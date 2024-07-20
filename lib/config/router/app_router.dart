@@ -10,6 +10,7 @@ import 'package:communitary_service_app/presentation/screens/forgot_password/for
 import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_screen.dart';
 import 'package:communitary_service_app/presentation/screens/screens.dart';
 import 'package:communitary_service_app/presentation/screens/splash/splash_screen.dart';
+import 'package:communitary_service_app/presentation/screens/user_control/user_control_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(initialLocation: '/splash', routes: [
@@ -87,5 +88,11 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
     redirect: authGuard,
     name: AlergiesScreen.routeName,
     builder: (context, state) => const AlergiesScreen(),
+  ),
+  GoRoute(
+    path: '/user_control',
+    redirect: authGuard,
+    name: UserControlScreen.routeName,
+    builder: (context, state) => const UserControlScreen(),
   )
 ]);
