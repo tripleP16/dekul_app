@@ -1,7 +1,11 @@
+import 'package:communitary_service_app/config/helpers/locator.dart';
+import 'package:communitary_service_app/domain/repositories/users/users_repository.dart';
+import 'package:communitary_service_app/presentation/blocs/users/users_list/users_list_bloc.dart';
 import 'package:communitary_service_app/presentation/screens/user_control/widgets/search_bar_without_sliver.dart';
 import 'package:communitary_service_app/presentation/screens/user_control/widgets/user_list.dart';
 import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserControlScreen extends StatelessWidget {
   static const String routeName = 'user_control';
@@ -9,11 +13,16 @@ class UserControlScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(title: 'Control de usuarios'),
-      body: const _Body(),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+    return BlocProvider(
+      create: (context) => UsersListBloc(
+        getIt<UsersRepository>(),
+      ),
+      child: Scaffold(
+        appBar: const CustomAppBar(title: 'Control de usuarios'),
+        body: const _Body(),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {}, child: const Icon(Icons.add)),
+      ),
     );
   }
 }
@@ -36,7 +45,8 @@ class _Body extends StatelessWidget {
             children: [
               SearchBarWithoutSliver(
                 labelText: 'Buscar usuarios',
-                onChanged: (value) => print('Search: $value'),
+                onChanged: (value) =>
+                    context.read<UsersListBloc>().search(value),
               ),
               VerticalSpacer.v10().createSpace(),
               const UserList()
