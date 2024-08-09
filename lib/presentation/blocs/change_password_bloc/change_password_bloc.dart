@@ -98,7 +98,6 @@ class ChangePasswordBloc
       appRouter.go('/home');
     } catch (e) {
       add(PostChangePasswordEvent(formState: ChangePasswordFormState.isValid));
-      print(e.toString());
       rethrow;
     }
   }
