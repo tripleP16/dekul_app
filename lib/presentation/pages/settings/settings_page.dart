@@ -39,7 +39,9 @@ class SettingsPage extends StatelessWidget {
               SettingsCard(
                 icon: Icons.lock,
                 title: 'Cambiar Contraseña',
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/change_password');
+                },
               ),
               VerticalSpacer.v60().createSpace(),
               SettingsCard(

@@ -1,16 +1,6 @@
 import 'package:communitary_service_app/config/router/guards/auth_guard.dart';
 import 'package:communitary_service_app/presentation/pages/home/home_page.dart';
-import 'package:communitary_service_app/presentation/screens/alergies/alergies_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/beneficiary_detail/beneficiary_details_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/create_beneficiary/medical_history_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/create_beneficiary/register_beneficiaries_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/create_beneficiary/register_parent_screen.dart';
-import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_code.dart';
-import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_email.dart';
-import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_screen.dart';
 import 'package:communitary_service_app/presentation/screens/screens.dart';
-import 'package:communitary_service_app/presentation/screens/splash/splash_screen.dart';
-import 'package:communitary_service_app/presentation/screens/user_control/user_control_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(initialLocation: '/splash', routes: [
@@ -94,5 +84,11 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
     redirect: authGuard,
     name: UserControlScreen.routeName,
     builder: (context, state) => const UserControlScreen(),
-  )
+  ),
+  GoRoute(
+    path: '/change_password',
+    redirect: authGuard,
+    name: ChangePasswordScreen.routeName,
+    builder: (context, state) => const ChangePasswordScreen(),
+  ),
 ]);
