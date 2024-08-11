@@ -15,6 +15,7 @@ import 'package:communitary_service_app/domain/datasources/auth/auth_datasource.
 import 'package:communitary_service_app/domain/datasources/change_password/change_password_datasource.dart';
 import 'package:communitary_service_app/domain/datasources/forgot_password/forgot_password_datasource.dart';
 import 'package:communitary_service_app/domain/datasources/login/login_datasource.dart';
+import 'package:communitary_service_app/domain/datasources/my_profile/my_profile_datasource.dart';
 import 'package:communitary_service_app/domain/datasources/users/users_datasource.dart';
 import 'package:communitary_service_app/domain/repositories/allergies/allergy_repository.dart';
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
@@ -22,17 +23,20 @@ import 'package:communitary_service_app/domain/repositories/beneficiaries/benefi
 import 'package:communitary_service_app/domain/repositories/change_password/change_password_repository.dart';
 import 'package:communitary_service_app/domain/repositories/forgot_password/forgot_password_repository.dart';
 import 'package:communitary_service_app/domain/repositories/login/login_repository.dart';
+import 'package:communitary_service_app/domain/repositories/my_profile/my_profile_repository.dart';
 import 'package:communitary_service_app/domain/repositories/users/users_repository.dart';
 import 'package:communitary_service_app/infraestructure/datasources/allergies/allergies_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/auth/auth_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/change_password/change_password_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/forgot_password/forgot_password_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/login/login_datasource_impl.dart';
+import 'package:communitary_service_app/infraestructure/datasources/my_profile/my_profile_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/datasources/users/users_datasource_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/auth/auth_repository_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/change_password/change_password_repository_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/forgot_password/forgot_password_repository_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/login/login_repository_impl.dart';
+import 'package:communitary_service_app/infraestructure/repositories/my_profile/my_profile_repository_impl.dart';
 import 'package:communitary_service_app/infraestructure/repositories/users/users_repository_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -50,10 +54,14 @@ class Locator {
   }
 
   Future<void> init() async {
-    getIt.registerLazySingleton<Environment>(() => EnvironmentService());
+    getIt.registerLazySingleton<Environment>(
+      () => EnvironmentService(),
+    );
     getIt.registerLazySingleton<IStorageService>(
         () => SharedPreferencesStorageService());
-    getIt.registerLazySingleton<SnackbarsService>(() => SnackbarsServiceImpl());
+    getIt.registerLazySingleton<SnackbarsService>(
+      () => SnackbarsServiceImpl(),
+    );
     getIt.registerLazySingleton<AlertDialogService>(
         () => AlertDialogServiceImpl());
 
@@ -130,6 +138,16 @@ class Locator {
     getIt.registerLazySingleton<ChangePasswordRepository>(
       () => ChangePasswordRepositoryImpl(
           datasource: getIt<ChangePasswordDatasource>()),
+    );
+
+    getIt.registerLazySingleton<MyProfileDatasource>(
+      () => MyProfileDatasourceImpl(apiService: getIt<IApiService>()),
+    );
+
+    getIt.registerLazySingleton<MyProfileRepository>(
+      () => MyProfileRepositoryImpl(
+        datasource: getIt<MyProfileDatasource>(),
+      ),
     );
   }
 

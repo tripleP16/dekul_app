@@ -95,7 +95,7 @@ class ChangePasswordBloc
         state.toDomain(),
       );
       add(PostChangePasswordEvent(formState: ChangePasswordFormState.posted));
-      appRouter.go('/home');
+      appRouter.pop();
     } catch (e) {
       add(PostChangePasswordEvent(formState: ChangePasswordFormState.isValid));
       rethrow;
