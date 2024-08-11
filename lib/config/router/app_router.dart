@@ -91,4 +91,10 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
     name: ChangePasswordScreen.routeName,
     builder: (context, state) => const ChangePasswordScreen(),
   ),
+  GoRoute(
+    path: '/edit_profile',
+    redirect: authGuard,
+    name: EditMyProfileScreen.routeName,
+    builder: (context, state) => const EditMyProfileScreen(),
+  )
 ]);

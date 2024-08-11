@@ -25,7 +25,9 @@ class SettingsPage extends StatelessWidget {
               SettingsCard(
                 icon: Icons.edit,
                 title: 'Editar mi Perfil',
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/edit_profile');
+                },
               ),
               VerticalSpacer.v60().createSpace(),
               SettingsCard(
