@@ -12,3 +12,4 @@ export './forgot_password/forgot_password_email.dart';
 export './splash/splash_screen.dart';
 export './user_control/user_control_screen.dart';
 export 'edit_my_profile/edit_my_profile_screen.dart';
+export './create_user/create_user_screen.dart';
