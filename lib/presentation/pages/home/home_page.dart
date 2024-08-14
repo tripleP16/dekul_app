@@ -1,3 +1,6 @@
+import 'package:communitary_service_app/config/helpers/locator.dart';
+import 'package:communitary_service_app/config/services/contracts/permissions_service.dart';
+import 'package:communitary_service_app/config/services/models/permissions_enum.dart';
 import 'package:communitary_service_app/presentation/pages/beneficiaries/beneficiaries_page.dart';
 import 'package:communitary_service_app/presentation/pages/reports/reports_page.dart';
 import 'package:communitary_service_app/presentation/pages/settings/settings_page.dart';
@@ -24,11 +27,20 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: const CustomBottomBar(),
       body: SizedBox(child: _pages[page.index]),
       floatingActionButton: page == Pages.beneficiaries || page == Pages.reports
-          ? FloatingActionButton(
-              onPressed: () {
-                context.push('/beneficiaries/create');
-              },
-              child: const Icon(Icons.add))
+          ? FutureBuilder(
+              future: getIt<PermissionsService>()
+                  .hasAccess(PermissionsEnum.createBeneficiary),
+              builder: (context, snapshot) {
+                if (snapshot.data ?? false) {
+                  return FloatingActionButton(
+                    onPressed: () {
+                      context.push('/beneficiaries/create');
+                    },
+                    child: const Icon(Icons.add),
+                  );
+                }
+                return const SizedBox.shrink();
+              })
           : null,
     );
   }
