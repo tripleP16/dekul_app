@@ -11,7 +11,7 @@ class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
     on<LoadUsersListEventNextPage>(_onLoadUsersNextPage);
     on<LoadUsersListWithSearchQuery>(_onLoadUsersWithSearchQuery);
     on<DeleteUserEvent>(_onDeleteUser);
-    add(LoadUsersListEventNextPage(nextPage: 1));
+    loadFirstPage();
   }
 
   Future<void> _onDeleteUser(
@@ -91,6 +91,10 @@ class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
   void loadNextPage() {
     final nextPage = state.paginatedUsers.currentPage + 1;
     add(LoadUsersListEventNextPage(nextPage: nextPage));
+  }
+
+  void loadFirstPage() {
+    add(LoadUsersListEventNextPage(nextPage: 1));
   }
 
   void search(String query) {

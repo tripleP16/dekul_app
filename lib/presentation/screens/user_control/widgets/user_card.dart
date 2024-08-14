@@ -48,6 +48,7 @@ class UserCard extends StatelessWidget {
                 borderRadius: BorderRadius.zero,
               ),
               child: ListTile(
+                onTap: () {},
                 title: Text(user.fullName),
                 trailing: FutureBuilder(
                     future: getIt<PermissionsService>()
