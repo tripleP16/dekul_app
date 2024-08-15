@@ -5,11 +5,13 @@ part 'parent_data_model.g.dart';
 
 @JsonSerializable()
 class ParentDataModel {
+  final String? id;
   final String name;
   final String lastname;
   final String phoneNumber;
 
   ParentDataModel({
+    required this.id,
     required this.name,
     required this.lastname,
     required this.phoneNumber,
@@ -22,6 +24,7 @@ class ParentDataModel {
 
   factory ParentDataModel.fromDomain(ParentModel domain) {
     return ParentDataModel(
+      id: domain.id,
       name: domain.name,
       lastname: domain.lastname,
       phoneNumber: domain.phoneNumber,
@@ -29,6 +32,7 @@ class ParentDataModel {
   }
 
   ParentModel toDomain() => ParentModel(
+        id: id,
         name: name,
         lastname: lastname,
         phoneNumber: phoneNumber,

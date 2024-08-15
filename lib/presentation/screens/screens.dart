@@ -1,3 +1,16 @@
 export './login/login_screen.dart';
-
 export './login/login_form_screen.dart';
+export './change_password/change_password_screen.dart';
+export './alergies/alergies_screen.dart';
+export './beneficiaries/beneficiary_detail/beneficiary_details_screen.dart';
+export './beneficiaries/create_beneficiary/register_beneficiaries_screen.dart';
+export './beneficiaries/create_beneficiary/medical_history_screen.dart';
+export './beneficiaries/create_beneficiary/register_parent_screen.dart';
+export './forgot_password/forgot_password_screen.dart';
+export './forgot_password/forgot_password_code.dart';
+export './forgot_password/forgot_password_email.dart';
+export './splash/splash_screen.dart';
+export './user_control/user_control_screen.dart';
+export 'edit_my_profile/edit_my_profile_screen.dart';
+export './create_user/create_user_screen.dart';
+export './medical_history_update/medical_history_update_screen.dart';

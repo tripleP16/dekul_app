@@ -15,7 +15,7 @@ class CreateBeneficiaryDataModel {
   final String gender;
   final ParentDataModel parent;
   final MedicalHistoryDataModel medicalHistory;
-  final List<BaseIdDataModel> allergies;
+  final List<BaseIdDataModel> alergies;
 
   CreateBeneficiaryDataModel({
     required this.name,
@@ -25,7 +25,7 @@ class CreateBeneficiaryDataModel {
     required this.gender,
     required this.parent,
     required this.medicalHistory,
-    required this.allergies,
+    required this.alergies,
   });
 
   factory CreateBeneficiaryDataModel.fromJson(Map<String, dynamic> json) =>
@@ -42,8 +42,7 @@ class CreateBeneficiaryDataModel {
       gender: domain.gender,
       parent: ParentDataModel.fromDomain(domain.parent),
       medicalHistory: MedicalHistoryDataModel.fromDomain(domain.medicalHistory),
-      allergies:
-          domain.allergies.map((e) => BaseIdDataModel(id: e.id)).toList(),
+      alergies: domain.allergies.map((e) => BaseIdDataModel(id: e.id)).toList(),
     );
   }
 }

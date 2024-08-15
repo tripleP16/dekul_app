@@ -1,14 +1,6 @@
 import 'package:communitary_service_app/config/router/guards/auth_guard.dart';
 import 'package:communitary_service_app/presentation/pages/home/home_page.dart';
-import 'package:communitary_service_app/presentation/screens/alergies/alergies_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/medical_history_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/register_beneficiaries_screen.dart';
-import 'package:communitary_service_app/presentation/screens/beneficiaries/register_parent_screen.dart';
-import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_code.dart';
-import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_email.dart';
-import 'package:communitary_service_app/presentation/screens/forgot_password/forgot_password_screen.dart';
 import 'package:communitary_service_app/presentation/screens/screens.dart';
-import 'package:communitary_service_app/presentation/screens/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(initialLocation: '/splash', routes: [
@@ -71,6 +63,21 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
         name: MedicalHistoryScreen.routeName,
         builder: (context, state) => const MedicalHistoryScreen(),
       ),
+      GoRoute(
+        path: 'details/:id',
+        redirect: authGuard,
+        name: BeneficiaryDetailsScreen.routeName,
+        builder: (context, state) => BeneficiaryDetailsScreen(
+          id: state.pathParameters['id'] ?? '',
+        ),
+      ),
+      GoRoute(
+        path: 'update/medical_history/:id',
+        redirect: authGuard,
+        name: MedicalHistoryUpdateScreen.routeName,
+        builder: (context, state) =>
+            MedicalHistoryUpdateScreen(id: state.pathParameters['id'] ?? ''),
+      ),
     ],
   ),
   GoRoute(
@@ -78,5 +85,28 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
     redirect: authGuard,
     name: AlergiesScreen.routeName,
     builder: (context, state) => const AlergiesScreen(),
-  )
+  ),
+  GoRoute(
+    path: '/user_control',
+    redirect: authGuard,
+    name: UserControlScreen.routeName,
+    builder: (context, state) => const UserControlScreen(),
+  ),
+  GoRoute(
+    path: '/change_password',
+    redirect: authGuard,
+    name: ChangePasswordScreen.routeName,
+    builder: (context, state) => const ChangePasswordScreen(),
+  ),
+  GoRoute(
+    path: '/edit_profile',
+    redirect: authGuard,
+    name: EditMyProfileScreen.routeName,
+    builder: (context, state) => const EditMyProfileScreen(),
+  ),
+  GoRoute(
+    path: '/create_user',
+    name: CreateUserScreen.routeName,
+    builder: (context, state) => const CreateUserScreen(),
+  ),
 ]);
