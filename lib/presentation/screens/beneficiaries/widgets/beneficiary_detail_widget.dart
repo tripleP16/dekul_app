@@ -5,6 +5,7 @@ import 'package:communitary_service_app/domain/models/beneficiaries/get_benefici
 import 'package:communitary_service_app/presentation/screens/beneficiaries/widgets/beneficiary_content.dart';
 import 'package:communitary_service_app/presentation/screens/beneficiaries/widgets/view_models/beneficiary_content_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../shared/widgets/widgets.dart';
 
@@ -109,7 +110,10 @@ class BeneficiaryDetail extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomElevatedButton.light(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pushReplacement(
+                                '/beneficiaries/update/medical_history/${model.id}');
+                          },
                           text: 'Actualizar medidas',
                           elevation: 2,
                           width: 35,

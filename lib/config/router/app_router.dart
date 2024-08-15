@@ -71,6 +71,13 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
           id: state.pathParameters['id'] ?? '',
         ),
       ),
+      GoRoute(
+        path: 'update/medical_history/:id',
+        redirect: authGuard,
+        name: MedicalHistoryUpdateScreen.routeName,
+        builder: (context, state) =>
+            MedicalHistoryUpdateScreen(id: state.pathParameters['id'] ?? ''),
+      ),
     ],
   ),
   GoRoute(
