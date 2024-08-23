@@ -1,5 +1,6 @@
 import 'package:communitary_service_app/config/services/contracts/alert_dialog_service.dart';
 import 'package:communitary_service_app/config/services/contracts/api_service.dart';
+import 'package:communitary_service_app/config/services/contracts/download_charts_service.dart';
 import 'package:communitary_service_app/config/services/contracts/environment.dart';
 import 'package:communitary_service_app/config/services/contracts/permissions_service.dart';
 import 'package:communitary_service_app/config/services/contracts/snackbars_service.dart';
@@ -7,6 +8,7 @@ import 'package:communitary_service_app/config/services/contracts/storage_servic
 import 'package:communitary_service_app/config/services/dio_factory.dart';
 import 'package:communitary_service_app/config/services/impl/alert_dialog_service_impl.dart';
 import 'package:communitary_service_app/config/services/impl/dio_api_service.dart';
+import 'package:communitary_service_app/config/services/impl/download_charts_service_impl.dart';
 import 'package:communitary_service_app/config/services/impl/environment_service.dart';
 import 'package:communitary_service_app/config/services/impl/permissions_service_impl.dart';
 import 'package:communitary_service_app/config/services/impl/shared_preferences_storage_service.dart';
@@ -162,6 +164,10 @@ class Locator {
       () => PrivilegesRepositoryImpl(
         privilegesDatasource: getIt<PrivilegesDatasource>(),
       ),
+    );
+
+    getIt.registerLazySingleton<DownloadChartsService>(
+      () => DownloadChartsServiceImpl(),
     );
   }
 

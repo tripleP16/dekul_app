@@ -9,3 +9,4 @@ export './custom_text_button.dart';
 export './main_logo_widget.dart';
 export './vertical_spacers.dart';
 export './view_models/custom_chip_view_model.dart';
+export './outlined_button.dart';

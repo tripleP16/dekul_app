@@ -1,5 +1,6 @@
 import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ReportsPage extends StatelessWidget {
   const ReportsPage({super.key});
@@ -22,7 +23,9 @@ class ReportsPage extends StatelessWidget {
                     'Este reporte muestra el incremento del BMI mensual y anual de cada uno de los beneficiarios de la asociación.',
                 icon: 'assets/icon/bmi_icon.png',
                 buttonText: 'Ver mas',
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/charts');
+                },
                 size: size),
             VerticalSpacer.v22().createSpace(),
             CustomCard(

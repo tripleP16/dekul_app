@@ -38,9 +38,11 @@ class _AutoCompleteBodyState extends State<AutoCompleteBody> {
             (context, textEditingController, focusNode, onFieldSubmitted) {
       _controller = textEditingController;
       return AutoCompleteTextField(
-          hintText: widget.viewModel.hintText,
-          textEditingController: _controller,
-          focusNode: focusNode);
+        hintText: widget.viewModel.hintText,
+        textEditingController: _controller,
+        focusNode: focusNode,
+        icon: widget.viewModel.icon,
+      );
     });
   }
 }
