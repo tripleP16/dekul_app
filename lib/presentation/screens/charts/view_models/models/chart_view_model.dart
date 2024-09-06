@@ -19,6 +19,4 @@ class ChartViewModel {
     required this.xTitle,
     required this.yTitle,
   });
-
-  
 }
