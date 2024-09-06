@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:communitary_service_app/domain/models/reports/reports_query_model.dart';
 import 'package:communitary_service_app/domain/repositories/reports/reports_repository.dart';
 import 'package:communitary_service_app/presentation/blocs/reports/reports_event.dart';
@@ -21,6 +23,9 @@ class ReportsBloc extends Bloc<ReportsEvent, ReportsState> {
         viewState: ReportViewState.loaded,
         report: reports,
         query: event.query,
+        color: event.color,
+        title: event.title,
+        text: event.text,
       ));
     } catch (e) {
       emit(state.copyWith(
@@ -32,7 +37,11 @@ class ReportsBloc extends Bloc<ReportsEvent, ReportsState> {
 
   void loadReport(
     ReportsQueryModel query,
+    Color? color,
+    String? title,
+    String? text,
   ) {
-    add(LoadReportsGlobal(query: query));
+    add(LoadReportsGlobal(
+        query: query, color: color, title: title, text: text));
   }
 }

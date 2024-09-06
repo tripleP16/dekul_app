@@ -1,6 +1,6 @@
 class ReportsModel {
   final int x;
-  final double value;
+  final double? value;
 
   ReportsModel({
     required this.x,

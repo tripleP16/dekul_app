@@ -1,4 +1,3 @@
-import 'package:communitary_service_app/presentation/screens/charts/widgets/line_chart_widget.dart';
 import 'package:communitary_service_app/presentation/screens/charts/widgets/report_description_widget.dart';
 import 'package:communitary_service_app/presentation/screens/charts/widgets/time_controller_widget.dart';
 import 'package:communitary_service_app/presentation/shared/widgets/custom_elevated_button_widget.dart';
@@ -50,11 +49,14 @@ class _IndividualChartScreenState extends State<IndividualChartScreen> {
                   child: Center(
                     child: RepaintBoundary(
                       key: _chartKey,
-                      child: const LineChartWidget(),
+                      child: const SizedBox.shrink(),
                     ),
                   ),
                 ),
-                const ReportDescription(),
+                const ReportDescription(
+                  title: 'Reporte Individual',
+                  text: 'Reporte individual de la comunidad',
+                ),
                 const Spacer(
                   flex: 2,
                 ),

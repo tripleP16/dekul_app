@@ -6,7 +6,7 @@ part 'reports_data_model.g.dart';
 @JsonSerializable()
 class ReportsDataModel {
   final int x;
-  final double value;
+  final double? value;
 
   ReportsDataModel({required this.x, required this.value});
 
