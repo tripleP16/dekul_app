@@ -36,7 +36,7 @@ class SettingsPage extends StatelessWidget {
                         context.push('/edit_profile');
                       },
                     ),
-                    VerticalSpacer.v60().createSpace(),
+                    VerticalSpacer.v30().createSpace(),
                     SettingsCard(
                       icon: Icons.group,
                       title: 'Control de usuarios',
@@ -44,7 +44,7 @@ class SettingsPage extends StatelessWidget {
                         context.push('/user_control');
                       },
                     ),
-                    VerticalSpacer.v60().createSpace(),
+                    VerticalSpacer.v30().createSpace(),
                     SettingsCard(
                       icon: Icons.lock,
                       title: 'Cambiar Contraseña',
@@ -53,7 +53,7 @@ class SettingsPage extends StatelessWidget {
                       },
                     ),
                     if (snapshot.data ?? false) ...[
-                      VerticalSpacer.v60().createSpace(),
+                      VerticalSpacer.v30().createSpace(),
                       SettingsCard(
                         icon: Icons.add,
                         title: 'Agregar alergia',
@@ -62,7 +62,7 @@ class SettingsPage extends StatelessWidget {
                         },
                       ),
                     ],
-                    VerticalSpacer.v60().createSpace(),
+                    VerticalSpacer.v30().createSpace(),
                     SettingsCard(
                       icon: Icons.logout,
                       title: 'Cerrar Sesión',
