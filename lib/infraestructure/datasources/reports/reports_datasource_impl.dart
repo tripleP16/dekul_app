@@ -1,9 +1,11 @@
 import 'package:communitary_service_app/config/helpers/list_converter.dart';
 import 'package:communitary_service_app/config/services/contracts/api_service.dart';
 import 'package:communitary_service_app/domain/datasources/reports/reports_datasource.dart';
+import 'package:communitary_service_app/domain/models/reports/individual_reports_model.dart';
 import 'package:communitary_service_app/domain/models/reports/reports_model.dart';
 import 'package:communitary_service_app/domain/models/reports/reports_query_model.dart';
 import 'package:communitary_service_app/infraestructure/errors/custom_error.dart';
+import 'package:communitary_service_app/infraestructure/models/reports/individual_reports_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/reports/reports_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/shared/base_response_data_model.dart';
 import 'package:dio/dio.dart';
@@ -16,7 +18,7 @@ class ReportsDatasourceImpl implements ReportsDatasource {
   }) : _apiService = apiService;
 
   @override
-  Future<List<ReportsModel>> getReportsByBeneficiaries(
+  Future<List<IndividualReportsModel>> getReportsByBeneficiaries(
       ReportsQueryModel query) async {
     try {
       final response = await _apiService.get(
@@ -24,11 +26,12 @@ class ReportsDatasourceImpl implements ReportsDatasource {
         params: query.toJson(),
       );
 
-      final reports = BaseResponseDataModel<List<ReportsDataModel>>.fromJson(
+      final reports =
+          BaseResponseDataModel<List<IndividualReportsDataModel>>.fromJson(
         response.data,
         (json) => (json as List<dynamic>)
             .toListOfMaps()
-            .map((e) => ReportsDataModel.fromJson(e))
+            .map((e) => IndividualReportsDataModel.fromJson(e))
             .toList(),
       ).data;
 

@@ -9,7 +9,7 @@ class AutocompleteWithChipsViewModel {
   final String labelText;
   final String hintText;
   final IconData? icon;
-
+  final Function(String)? onChanged;
   AutocompleteWithChipsViewModel({
     required this.items,
     required this.onSelected,
@@ -18,5 +18,6 @@ class AutocompleteWithChipsViewModel {
     required this.hintText,
     required this.selectedItems,
     this.icon,
+    this.onChanged,
   });
 }

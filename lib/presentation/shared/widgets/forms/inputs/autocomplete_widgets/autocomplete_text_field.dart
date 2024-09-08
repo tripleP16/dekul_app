@@ -5,6 +5,7 @@ class AutoCompleteTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final FocusNode focusNode;
   final IconData? icon;
+  final Function(String)? onChanged;
 
   const AutoCompleteTextField({
     super.key,
@@ -12,6 +13,7 @@ class AutoCompleteTextField extends StatelessWidget {
     required this.textEditingController,
     required this.focusNode,
     this.icon,
+    this.onChanged,
   });
 
   @override
@@ -26,6 +28,7 @@ class AutoCompleteTextField extends StatelessWidget {
       ),
       controller: textEditingController,
       focusNode: focusNode,
+      onChanged: onChanged,
     );
   }
 }

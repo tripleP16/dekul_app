@@ -52,6 +52,7 @@ void main() async {
     BlocProvider(
       create: (_) => ReportsBloc(
         getIt<ReportsRepository>(),
+        getIt<BeneficiariesRepository>(),
       ),
     ),
     BlocProvider(

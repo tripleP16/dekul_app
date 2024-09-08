@@ -1,6 +1,11 @@
+import 'package:communitary_service_app/domain/models/beneficiaries/beneficiary_model.dart';
+import 'package:communitary_service_app/domain/models/reports/individual_reports_model.dart';
 import 'package:communitary_service_app/domain/models/reports/reports_model.dart';
 import 'package:communitary_service_app/domain/models/reports/reports_query_model.dart';
+import 'package:communitary_service_app/domain/models/shared/list_paginated_model.dart';
+import 'package:communitary_service_app/domain/models/shared/pagination_and_search_model.dart';
 import 'package:communitary_service_app/presentation/screens/charts/view_models/enums/chart_type_enum.dart';
+import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +20,9 @@ class ReportsState {
   final ReportsQueryModel query;
   final String title;
   final String text;
-
+  final ListPaginatedModel<BeneficiaryModel> beneficiaries;
+  final PaginationAndSearchModel beneficiariesQuery;
+  final List<IndividualReportsModel> individualReports;
   ReportsState({
     required this.viewState,
     required this.report,
@@ -25,6 +32,9 @@ class ReportsState {
     this.color = Colors.blue,
     this.title = 'Reporte Global',
     this.text = 'Reporte global de la comunidad',
+    required this.beneficiaries,
+    required this.beneficiariesQuery,
+    required this.individualReports,
   });
 
   bool get isLoading => viewState == ReportViewState.loading;
@@ -39,15 +49,19 @@ class ReportsState {
 
   List<String>? get userIds => query.userIds;
 
-  ReportsState copyWith(
-      {ReportViewState? viewState,
-      List<ReportsModel>? report,
-      ValueGetter<String?>? errorMessage,
-      ChartType? chartType,
-      ReportsQueryModel? query,
-      String? title,
-      String? text,
-      Color? color}) {
+  ReportsState copyWith({
+    ReportViewState? viewState,
+    List<ReportsModel>? report,
+    ValueGetter<String?>? errorMessage,
+    ChartType? chartType,
+    ReportsQueryModel? query,
+    String? title,
+    String? text,
+    Color? color,
+    ListPaginatedModel<BeneficiaryModel>? beneficiaries,
+    PaginationAndSearchModel? beneficiariesQuery,
+    List<IndividualReportsModel>? individualReports,
+  }) {
     return ReportsState(
       viewState: viewState ?? this.viewState,
       report: report ?? this.report,
@@ -57,6 +71,9 @@ class ReportsState {
       color: color ?? this.color,
       text: text ?? this.text,
       title: title ?? this.title,
+      beneficiaries: beneficiaries ?? this.beneficiaries,
+      beneficiariesQuery: beneficiariesQuery ?? this.beneficiariesQuery,
+      individualReports: individualReports ?? this.individualReports,
     );
   }
 
@@ -68,6 +85,10 @@ class ReportsState {
       chartType: ChartType.bar,
       query: ReportsQueryModel.initial(),
       color: Colors.blue,
+      beneficiaries: ListPaginatedModel.empty(),
+      beneficiariesQuery:
+          PaginationAndSearchModel(page: 1, pageSize: 10, search: null),
+      individualReports: [],
     );
   }
 
@@ -79,4 +100,20 @@ class ReportsState {
   bool get isAnual => query.isYearly;
 
   bool get isMonthly => !query.isYearly;
+
+  List<CustomChipViewModel> get beneficiaryChips => beneficiaries.data
+      .map((e) => CustomChipViewModel(
+            label: '${e.name} ${e.lastname}',
+            value: e.id,
+          ))
+      .toList();
+
+  List<CustomChipViewModel> get selectedBeneficiariesChip =>
+      query.userIds
+          ?.map((e) => CustomChipViewModel(
+                label: e,
+                value: e,
+              ))
+          .toList() ??
+      [];
 }

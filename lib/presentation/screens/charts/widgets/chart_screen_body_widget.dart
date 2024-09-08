@@ -2,8 +2,8 @@ import 'package:communitary_service_app/config/helpers/locator.dart';
 import 'package:communitary_service_app/config/services/contracts/download_charts_service.dart';
 import 'package:communitary_service_app/presentation/blocs/reports/reports_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/reports/reports_state.dart';
-import 'package:communitary_service_app/presentation/screens/charts/widgets/bar_chart_widget.dart';
-import 'package:communitary_service_app/presentation/screens/charts/widgets/line_chart_widget.dart';
+import 'package:communitary_service_app/presentation/screens/charts/widgets/charts/bar_chart_widget.dart';
+import 'package:communitary_service_app/presentation/screens/charts/widgets/charts/line_chart_widget.dart';
 import 'package:communitary_service_app/presentation/screens/charts/widgets/report_description_widget.dart';
 import 'package:communitary_service_app/presentation/screens/charts/widgets/time_controller_widget.dart';
 import 'package:communitary_service_app/presentation/shared/widgets/custom_elevated_button_widget.dart';
@@ -49,7 +49,23 @@ class _ChartScreenBodyWidgetState extends State<ChartScreenBodyWidget> {
           const SizedBox(
             height: 40,
           ),
-          const TimeControllerWidget(),
+          TimeControllerWidget(
+            onAnualPressed: state.isAnual
+                ? null
+                : () {
+                    context.read<ReportsBloc>().loadReport(
+                        state.query.copyWith(isYearly: true), null, null, null);
+                  },
+            onMonthlyPressed: state.isMonthly
+                ? null
+                : () {
+                    context.read<ReportsBloc>().loadReport(
+                        state.query.copyWith(isYearly: false),
+                        null,
+                        null,
+                        null);
+                  },
+          ),
           const SizedBox(
             height: 20,
           ),
@@ -90,6 +106,13 @@ class _ChartScreenBodyWidgetState extends State<ChartScreenBodyWidget> {
           ),
           CustomElevatedButton.dark(
             onPressed: () {
+              context.read<ReportsBloc>().loadIndividualReport(
+                  state.query.copyWith(
+                    userIds: () => [state.beneficiaries.data.first.id],
+                  ),
+                  null,
+                  null,
+                  null);
               context.push('/chart/individual');
             },
             text: 'Ir a reportes individuales',
