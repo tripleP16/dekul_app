@@ -12,7 +12,7 @@ export './forgot_password/forgot_password_email.dart';
 export './splash/splash_screen.dart';
 export './user_control/user_control_screen.dart';
 export './edit_my_profile/edit_my_profile_screen.dart';
-export './create_user/create_user_screen.dart';
+export 'create_user/user_screen.dart';
 export './medical_history_update/medical_history_update_screen.dart';
 export './charts/chart_screen.dart';
 export './charts/individual_chart_screen.dart';

@@ -1,46 +1,68 @@
 import 'package:communitary_service_app/config/router/app_router.dart';
 import 'package:communitary_service_app/domain/models/privilege/privilege_model.dart';
 import 'package:communitary_service_app/domain/repositories/users/users_repository.dart';
-import 'package:communitary_service_app/presentation/blocs/create_user/create_user_event.dart';
-import 'package:communitary_service_app/presentation/blocs/create_user/create_user_state.dart';
+import 'package:communitary_service_app/presentation/blocs/create_user/user_event.dart';
+import 'package:communitary_service_app/presentation/blocs/create_user/user_state.dart';
 import 'package:communitary_service_app/presentation/shared/form_inputs/email.dart';
 import 'package:communitary_service_app/presentation/shared/form_inputs/lastname.dart';
 import 'package:communitary_service_app/presentation/shared/form_inputs/name.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
-class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
+class UserBloc extends Bloc<UserEvent, UserState> {
   final UsersRepository usersRepository;
-  CreateUserBloc(this.usersRepository) : super(CreateUserState.initial()) {
+  UserBloc(this.usersRepository) : super(UserState.initial()) {
     on<InputNameUserEvent>(_changeName);
     on<InputLastnameUserEvent>(_changeLastname);
     on<InputEmailUserEvent>(_changeEmail);
     on<InputPrivilegeAddedEvent>(_addPrivilege);
     on<InputPrivilegeRemovedEvent>(_removePrivilege);
     on<PostCreateUserEvent>(_postCreateUser);
+    on<StartEditingUserEvent>(_startEditing);
   }
 
-  void _changeName(InputNameUserEvent event, Emitter<CreateUserState> emit) {
+  Future<void> _startEditing(
+      StartEditingUserEvent event, Emitter<UserState> emit) async {
+    emit(state.copyWith(isEditing: true));
+    emit(
+        state.copyWith(errorMessage: null, formState: UserFormState.isLoadingToEdit));
+    try {
+      final user = await usersRepository.fetchUser(event.id);
+      emit(state.copyWith(
+        name: Name.dirty(user.name),
+        lastname: Lastname.dirty(user.lastname),
+        email: Email.dirty(user.email),
+        privileges: user.privileges ?? [],
+        formState: UserFormState.isValid,
+        isEditing: true,
+        id: () => event.id,
+      ));
+    } catch (e) {
+      emit(state.copyWith(errorMessage: () => e.toString()));
+    }
+  }
+
+  void _changeName(InputNameUserEvent event, Emitter<UserState> emit) {
     emit(state.copyWith(name: Name.dirty(event.name)));
     _isFormValid(emit);
   }
 
   void _changeLastname(
     InputLastnameUserEvent event,
-    Emitter<CreateUserState> emit,
+    Emitter<UserState> emit,
   ) {
     emit(state.copyWith(lastname: Lastname.dirty(event.lastname)));
     _isFormValid(emit);
   }
 
-  void _changeEmail(InputEmailUserEvent event, Emitter<CreateUserState> emit) {
+  void _changeEmail(InputEmailUserEvent event, Emitter<UserState> emit) {
     emit(state.copyWith(email: Email.dirty(event.email)));
     _isFormValid(emit);
   }
 
   void _addPrivilege(
     InputPrivilegeAddedEvent event,
-    Emitter<CreateUserState> emit,
+    Emitter<UserState> emit,
   ) {
     final exists = state.privileges.any((e) => e.id == event.privilege.id);
     if (exists) return;
@@ -52,7 +74,7 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
 
   void _removePrivilege(
     InputPrivilegeRemovedEvent event,
-    Emitter<CreateUserState> emit,
+    Emitter<UserState> emit,
   ) {
     emit(state.copyWith(
       privileges:
@@ -63,7 +85,7 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
   }
 
   void _isFormValid(
-    Emitter<CreateUserState> emit,
+    Emitter<UserState> emit,
   ) {
     final isValid = Formz.validate([
           Name.dirty(state.name.value),
@@ -73,17 +95,17 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
         state.privileges.isNotEmpty;
 
     if (isValid) {
-      emit(state.copyWith(formState: CreateUserFormState.isValid));
+      emit(state.copyWith(formState: UserFormState.isValid));
     } else {
-      emit(state.copyWith(formState: CreateUserFormState.isNotValid));
+      emit(state.copyWith(formState: UserFormState.isNotValid));
     }
   }
 
   void _postCreateUser(
     PostCreateUserEvent event,
-    Emitter<CreateUserState> emit,
+    Emitter<UserState> emit,
   ) {
-    if (state.formState == CreateUserFormState.isNotValid) return;
+    if (state.formState == UserFormState.isNotValid) return;
 
     emit(state.copyWith(formState: event.formState));
   }
@@ -108,14 +130,26 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
     add(InputPrivilegeRemovedEvent(privilege: privilege));
   }
 
+  void onStartEditing(String id) {
+    add(StartEditingUserEvent(id: id));
+  }
+
   Future<void> onSubmit() async {
-    add(PostCreateUserEvent(formState: CreateUserFormState.isLoading));
+    add(PostCreateUserEvent(formState: UserFormState.isLoading));
     try {
-      await usersRepository.createUser(state.toDomain());
-      add(PostCreateUserEvent(formState: CreateUserFormState.posted));
+      if (!state.isEditing) {
+        await usersRepository.createUser(
+          state.toDomain(),
+        );
+      } else {
+        await usersRepository.updateUser(
+          state.toUpdateDomain(),
+        );
+      }
+      add(PostCreateUserEvent(formState: UserFormState.posted));
       appRouter.go('/home');
     } catch (e) {
-      add(PostCreateUserEvent(formState: CreateUserFormState.isValid));
+      add(PostCreateUserEvent(formState: UserFormState.isValid));
       rethrow;
     }
   }

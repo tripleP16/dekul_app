@@ -6,6 +6,7 @@ import 'package:communitary_service_app/domain/models/users/users_model.dart';
 import 'package:communitary_service_app/presentation/blocs/users/users_list/users_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class UserCard extends StatelessWidget {
   final UsersModel user;
@@ -48,7 +49,9 @@ class UserCard extends StatelessWidget {
                 borderRadius: BorderRadius.zero,
               ),
               child: ListTile(
-                onTap: () {},
+                onTap: () {
+                  context.push('/user/${user.id}');
+                },
                 title: Text(user.fullName),
                 trailing: FutureBuilder(
                     future: getIt<PermissionsService>()
@@ -57,7 +60,9 @@ class UserCard extends StatelessWidget {
                       final canUpdate = snapshot.data ?? false;
                       if (!canUpdate) return const SizedBox.shrink();
                       return IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push('/user/${user.id}');
+                        },
                         icon: const Icon(Icons.edit),
                       );
                     }),
