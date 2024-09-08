@@ -2,6 +2,7 @@ import 'package:communitary_service_app/domain/datasources/users/users_datasourc
 import 'package:communitary_service_app/domain/models/shared/list_paginated_model.dart';
 import 'package:communitary_service_app/domain/models/shared/pagination_and_search_model.dart';
 import 'package:communitary_service_app/domain/models/users/create_user_model.dart';
+import 'package:communitary_service_app/domain/models/users/update_user_model.dart';
 import 'package:communitary_service_app/domain/models/users/users_model.dart';
 import 'package:communitary_service_app/domain/repositories/users/users_repository.dart';
 
@@ -25,5 +26,15 @@ class UsersRepositoryImpl implements UsersRepository {
   @override
   Future<void> createUser(CreateUserModel model) {
     return usersDatasource.createUser(model);
+  }
+
+  @override
+  Future<UsersModel> fetchUser(String userId) {
+    return usersDatasource.fetchUser(userId);
+  }
+
+  @override
+  Future<void> updateUser(UpdateUserModel model) {
+    return usersDatasource.updateUser(model);
   }
 }

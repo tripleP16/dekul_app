@@ -3,12 +3,14 @@ import 'package:communitary_service_app/domain/datasources/users/users_datasourc
 import 'package:communitary_service_app/domain/models/shared/list_paginated_model.dart';
 import 'package:communitary_service_app/domain/models/shared/pagination_and_search_model.dart';
 import 'package:communitary_service_app/domain/models/users/create_user_model.dart';
+import 'package:communitary_service_app/domain/models/users/update_user_model.dart';
 import 'package:communitary_service_app/domain/models/users/users_model.dart';
 import 'package:communitary_service_app/infraestructure/errors/custom_error.dart';
 import 'package:communitary_service_app/infraestructure/mappers/paginated_list_users_mapper.dart';
 import 'package:communitary_service_app/infraestructure/models/shared/base_response_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/shared/list_paginated_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/users/create_user_data_model.dart';
+import 'package:communitary_service_app/infraestructure/models/users/update_user_data_model.dart';
 import 'package:communitary_service_app/infraestructure/models/users/users_data_model.dart';
 import 'package:dio/dio.dart';
 
@@ -90,6 +92,33 @@ class UsersDatasourceImpl implements UsersDatasource {
     } catch (e) {
       throw CustomError(
           message: 'Error en el servidor por favor intente mas tarde');
+    }
+  }
+
+  @override
+  Future<UsersModel> fetchUser(String userId) async {
+    try {
+      final response = await _apiService.get(url: 'users/$userId');
+      final baseResponse = BaseResponseDataModel<UsersDataModel>.fromJson(
+        response.data,
+        (json) => UsersDataModel.fromJson(json as Map<String, dynamic>),
+      );
+      return baseResponse.data.toDomain();
+    } on DioException catch (e) {
+      throw CustomError(message: _handleDioException(e));
+    }
+  }
+
+  @override
+  Future<void> updateUser(UpdateUserModel model) async {
+    try {
+      final dataModel = UpdateUserDataModel.fromDomain(model);
+      await _apiService.put(
+        url: 'users/edit/${model.id}',
+        body: dataModel.toJson(),
+      );
+    } on DioException catch (e) {
+      throw CustomError(message: _handleDioException(e));
     }
   }
 }
