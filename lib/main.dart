@@ -6,6 +6,7 @@ import 'package:communitary_service_app/domain/repositories/allergies/allergy_re
 import 'package:communitary_service_app/domain/repositories/auth/auth_repository.dart';
 import 'package:communitary_service_app/domain/repositories/beneficiaries/beneficiaries_repository.dart';
 import 'package:communitary_service_app/domain/repositories/forgot_password/forgot_password_repository.dart';
+import 'package:communitary_service_app/domain/repositories/reports/reports_repository.dart';
 import 'package:communitary_service_app/presentation/blocs/allergies/allergies_cubit.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/auth/auth_event.dart';
@@ -16,6 +17,7 @@ import 'package:communitary_service_app/presentation/blocs/beneficiaries/registe
 import 'package:communitary_service_app/presentation/blocs/forgot_password/create_code_bloc/create_code_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/forgot_password/restore_password/reset_password_bloc.dart';
 import 'package:communitary_service_app/presentation/blocs/forgot_password/validate_code_bloc/validate_code_bloc.dart';
+import 'package:communitary_service_app/presentation/blocs/reports/reports_bloc.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/bottom_navigation_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:communitary_service_app/presentation/shared/blocs/forms_state_cubit/forms_cubit.dart';
 import 'package:dio/dio.dart';
@@ -45,6 +47,12 @@ void main() async {
     BlocProvider(
       create: (context) => AuthBloc(
         getIt<AuthRepository>(),
+      ),
+    ),
+    BlocProvider(
+      create: (_) => ReportsBloc(
+        getIt<ReportsRepository>(),
+        getIt<BeneficiariesRepository>(),
       ),
     ),
     BlocProvider(
