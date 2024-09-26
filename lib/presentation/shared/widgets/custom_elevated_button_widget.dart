@@ -84,10 +84,10 @@ class CustomElevatedButton extends StatelessWidget {
     final theme = Theme.of(context);
     return ElevatedButton(
       style: ButtonStyle(
-        elevation: WidgetStatePropertyAll<double>(elevation),
-        backgroundColor:
-            WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
+        elevation: MaterialStatePropertyAll<double>(elevation),
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
             return AppColors.disabled;
           }
           return backgroundColor;

@@ -35,10 +35,10 @@ class TextInputWidget extends StatefulWidget {
   });
 
   @override
-  State<TextInputWidget> createState() => _TextInputWidgetState();
+  State<TextInputWidget> createState() => _TextInputMaterialState();
 }
 
-class _TextInputWidgetState extends State<TextInputWidget> {
+class _TextInputMaterialState extends State<TextInputWidget> {
   final _controller = TextEditingController();
 
   @override

@@ -15,10 +15,10 @@ class ChartScreenBodyWidget extends StatefulWidget {
   const ChartScreenBodyWidget({super.key});
 
   @override
-  State<ChartScreenBodyWidget> createState() => _ChartScreenBodyWidgetState();
+  State<ChartScreenBodyWidget> createState() => _ChartScreenBodyMaterialState();
 }
 
-class _ChartScreenBodyWidgetState extends State<ChartScreenBodyWidget> {
+class _ChartScreenBodyMaterialState extends State<ChartScreenBodyWidget> {
   final GlobalKey _chartKey = GlobalKey();
 
   bool isLoadingReport = false;

@@ -42,9 +42,9 @@ const inputTheme = InputDecorationTheme(
 
 const elevatedButtonTheme = ElevatedButtonThemeData(
   style: ButtonStyle(
-      foregroundColor: WidgetStatePropertyAll(Colors.white),
-      backgroundColor: WidgetStatePropertyAll(AppColors.primary),
-      overlayColor: WidgetStatePropertyAll(Color(0x7FAD0F0F))),
+      foregroundColor: MaterialStatePropertyAll(Colors.white),
+      backgroundColor: MaterialStatePropertyAll(AppColors.primary),
+      overlayColor: MaterialStatePropertyAll(Color(0x7FAD0F0F))),
 );
 
 class AppTheme {

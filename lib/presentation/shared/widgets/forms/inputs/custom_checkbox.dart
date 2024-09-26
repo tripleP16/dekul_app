@@ -27,8 +27,9 @@ class CustomCheckbox extends StatelessWidget {
           Transform.scale(
             scale: 1.5,
             child: Checkbox(
-              fillColor: WidgetStateProperty.resolveWith((states) {
-                if (states.any((element) => element == WidgetState.selected)) {
+              fillColor: MaterialStateProperty.resolveWith((states) {
+                if (states
+                    .any((element) => element == MaterialState.selected)) {
                   return AppColors.alertColor;
                 }
                 return AppColors.primarySurface;
