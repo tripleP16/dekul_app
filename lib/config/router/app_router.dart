@@ -106,7 +106,23 @@ final appRouter = GoRouter(initialLocation: '/splash', routes: [
   ),
   GoRoute(
     path: '/create_user',
-    name: CreateUserScreen.routeName,
-    builder: (context, state) => const CreateUserScreen(),
+    name: UserScreen.routeName,
+    builder: (context, state) => const UserScreen(),
   ),
+  GoRoute(
+    path: '/charts',
+    name: ChartScreen.routeName,
+    builder: (context, state) => const ChartScreen(),
+  ),
+  GoRoute(
+    path: '/chart/individual',
+    name: IndividualChartScreen.routeName,
+    builder: (context, state) => const IndividualChartScreen(),
+  ),
+  GoRoute(
+    path: '/user/:id',
+    builder: (context, state) => UserScreen(
+      id: state.pathParameters['id'] ?? '',
+    ),
+  )
 ]);

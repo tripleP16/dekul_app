@@ -1,12 +1,8 @@
-import 'package:communitary_service_app/config/helpers/locator.dart';
-import 'package:communitary_service_app/config/services/contracts/permissions_service.dart';
-import 'package:communitary_service_app/config/services/models/permissions_enum.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:communitary_service_app/config/themes/themes.dart';
 import 'package:communitary_service_app/domain/models/beneficiaries/beneficiary_model.dart';
-import 'package:communitary_service_app/presentation/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../config/themes/themes.dart';
 
 class BeneficiariesCard extends StatelessWidget {
   final BeneficiaryModel beneficiary;
@@ -19,53 +15,75 @@ class BeneficiariesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      child: ListTile(
+    return FadeInLeft(
+      child: GestureDetector(
         onTap: () {
           context.push(
             '/beneficiaries/details/${beneficiary.id}',
           );
         },
-        tileColor: AppColors.greyColor.withOpacity(0.4),
-        title: Text(
-          '${beneficiary.name} ${beneficiary.lastname}',
-          style: theme.textTheme.bodyLarge,
-        ),
-        subtitle: Text(
-          'Edad : ${beneficiary.age}',
-          style: theme.textTheme.bodySmall,
-        ),
-        leading: CircleAvatar(
-          child: Text(beneficiary.name.characters.first),
-        ),
-        trailing: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FutureBuilder(
-                future: getIt<PermissionsService>()
-                    .hasAccess(PermissionsEnum.updateBeneficiary),
-                builder: (context, snapshot) {
-                  if (snapshot.data ?? false) {
-                    return CustomElevatedButton.grey(
-                      elevation: 2,
-                      width: 2,
-                      height: 5,
-                      text: 'Editar',
-                      onPressed: () {},
-                    );
-                  }
-                  return const SizedBox.shrink();
-                }),
-            if (beneficiary.needsMedicalHistoryUpdate ?? false) ...[
-              const SizedBox(width: 10),
-              const Badge(
-                smallSize: 20,
-                offset: Offset(100, 100),
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          height: 100,
+          decoration: const BoxDecoration(
+            color: AppColors.onPrimary,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black87,
+                offset: Offset(0.0, 1.0), //(x,y)
+                blurRadius: 6,
               ),
-            ]
-          ],
+            ],
+          ),
+          child: Stack(children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    child: Text(beneficiary.name.characters.first),
+                  ),
+                  const SizedBox(width: 30),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${beneficiary.name} ${beneficiary.lastname}',
+                        style: theme.textTheme.bodyLarge,
+                      ),
+                      Text(
+                        'Edad : ${beneficiary.age}',
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            if (beneficiary.needsMedicalHistoryUpdate ?? false) ...[
+              Positioned(
+                right: 0,
+                top: 0,
+                child: Container(
+                  width: 60,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: const Icon(Icons.medical_information),
+                ),
+              ),
+            ],
+          ]),
         ),
       ),
     );

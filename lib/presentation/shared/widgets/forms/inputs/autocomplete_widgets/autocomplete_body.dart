@@ -27,6 +27,7 @@ class _AutoCompleteBodyState extends State<AutoCompleteBody> {
         onTapped: (p0) {
           widget.viewModel.onSelected(p0);
           _controller.clear();
+          FocusScope.of(context).unfocus();
         },
       );
     }, optionsBuilder: (TextEditingValue text) {
@@ -38,9 +39,12 @@ class _AutoCompleteBodyState extends State<AutoCompleteBody> {
             (context, textEditingController, focusNode, onFieldSubmitted) {
       _controller = textEditingController;
       return AutoCompleteTextField(
-          hintText: widget.viewModel.hintText,
-          textEditingController: _controller,
-          focusNode: focusNode);
+        hintText: widget.viewModel.hintText,
+        textEditingController: _controller,
+        focusNode: focusNode,
+        icon: widget.viewModel.icon,
+        onChanged: widget.viewModel.onChanged,
+      );
     });
   }
 }

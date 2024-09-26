@@ -25,19 +25,11 @@ class BeneficiaryDetailsScreen extends StatelessWidget {
           future: getIt<PermissionsService>()
               .hasAccess(PermissionsEnum.updateBeneficiary),
           builder: (context, snapshot) {
-            return Scaffold(
+            return const Scaffold(
               appBar: CustomAppBar(
                 title: 'Beneficiario',
-                actions: snapshot.data ?? false
-                    ? [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.edit),
-                        ),
-                      ]
-                    : null,
               ),
-              body: const _Body(),
+              body: _Body(),
             );
           }),
     );
