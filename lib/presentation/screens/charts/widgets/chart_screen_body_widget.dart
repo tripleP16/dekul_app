@@ -80,46 +80,48 @@ class _ChartScreenBodyMaterialState extends State<ChartScreenBodyWidget> {
           const SizedBox(
             height: 20,
           ),
-          CustomElevatedButton.light(
-            onPressed: isLoadingReport
-                ? null
-                : () async {
-                    setState(() {
-                      isLoadingReport = true;
-                    });
-                    await _generatePdf(
-                      state.title,
-                      state.text,
-                    );
+          if (state.beneficiaries.data.isNotEmpty) ...[
+            CustomElevatedButton.light(
+              onPressed: isLoadingReport
+                  ? null
+                  : () async {
+                      setState(() {
+                        isLoadingReport = true;
+                      });
+                      await _generatePdf(
+                        state.title,
+                        state.text,
+                      );
 
-                    setState(() {
-                      isLoadingReport = false;
-                    });
-                  },
-            text: 'Descargar',
-            elevation: 2,
-            width: 50,
-            height: 15,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomElevatedButton.dark(
-            onPressed: () {
-              context.read<ReportsBloc>().loadIndividualReport(
-                  state.query.copyWith(
-                    userIds: () => [state.beneficiaries.data.first.id],
-                  ),
-                  null,
-                  null,
-                  null);
-              context.push('/chart/individual');
-            },
-            text: 'Ir a reportes individuales',
-            elevation: 2,
-            width: 30,
-            height: 15,
-          ),
+                      setState(() {
+                        isLoadingReport = false;
+                      });
+                    },
+              text: 'Descargar',
+              elevation: 2,
+              width: 50,
+              height: 15,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomElevatedButton.dark(
+              onPressed: () {
+                context.read<ReportsBloc>().loadIndividualReport(
+                    state.query.copyWith(
+                      userIds: () => [state.beneficiaries.data.first.id],
+                    ),
+                    null,
+                    null,
+                    null);
+                context.push('/chart/individual');
+              },
+              text: 'Ir a reportes individuales',
+              elevation: 2,
+              width: 30,
+              height: 15,
+            ),
+          ],
           const SizedBox(
             height: 50,
           )
@@ -152,6 +154,17 @@ class _Chart extends StatelessWidget {
             child: Text(
               state.errorMessage ?? 'Error al cargar el reporte',
               style: theme.textTheme.bodyMedium,
+            ),
+          );
+        }
+        if (state.beneficiaries.data.isEmpty) {
+          return Container(
+            margin: const EdgeInsets.only(bottom: 30),
+            child: Center(
+              child: Text(
+                state.errorMessage ?? 'No hay beneficiarios registrados',
+                style: theme.textTheme.bodyMedium,
+              ),
             ),
           );
         }
